@@ -26,7 +26,10 @@ class Player:
         self.down_limit = HEIGHT - self.player_height
         self.character_sprite = pygame.Rect(self.x, self.y, self.player_width, self.player_height)
         self.sprite = pygame.image.load('theGuy_right.png')
-
+        self.sprite_frame = 0
+        self.can_jump = False
+        self.face_right = True
+        self.foot_up = False
 
     def move_up(self):
         if self.y>0:
@@ -36,15 +39,39 @@ class Player:
         if self.y < self.down_limit:
             self.y += Player.speed
     def move_right(self):
+        self.face_right = True
         if self.x < self.right_limit:
             self.x += Player.speed
-            self.sprite = pygame.image.load('theGuy_right.png')
+
+            if self.foot_up == False:
+                self.sprite_frame = 2
+                self.foot_up = True
+            else:
+                self.sprite_frame = 3
+                self.foot_up = False
+
+            if self.can_jump == False:
+                self.sprite_frame = 0
+
     def move_left(self):
-        if self.x > 0 :
+        self.face_right = False
+        if self.x > 0:
             self.x -= Player.speed
-            self.sprite = pygame.image.load('theGuy_left.png')
-    def jump(self,can):
-        if can:
+
+            if self.foot_up == False:
+                self.sprite_frame = 4
+                self.foot_up = True
+            else:
+                self.sprite_frame = 5
+                self.foot_up = False
+            if self.can_jump == False:
+                self.sprite_frame = 1
+
+
+
+
+    def jump(self):
+        if self.can_jump:
             self.jump_counter = 260
         if self.jump_counter > 0:
             self.move_up()
@@ -58,7 +85,12 @@ class Player:
 
     def movement(self,keys,blocks):
 
-        can_jump = False
+        if self.face_right == True:
+            self.sprite_frame = 0
+        else:
+            self.sprite_frame = 1
+
+        self.can_jump = False
 
         down_rect = pygame.Rect(self.x + 2, self.y+self.player_height,self.player_width - 4,1)
 
@@ -71,7 +103,7 @@ class Player:
             self.move_down()
             self.move_down()
         else:
-            can_jump = True
+            self.can_jump = True
 
 
         if (keys[pygame.K_w]):
@@ -93,11 +125,28 @@ class Player:
 
 
         if (keys[pygame.K_SPACE]):
-            self.jump(can_jump)
+            self.jump()
+
+
+
+
 
     def draw(self, screen):
         self.character_sprite = pygame.Rect(self.x, self.y, self.player_width, self.player_height)
         pygame.draw.rect(screen, CHARACTER_COLOR, self.character_sprite)
         Player.sprite_display.blit(self.sprite,(self.x-20,self.y))
+
+        if self.sprite_frame == 0:
+            self.sprite = pygame.image.load('theGuy_right.png')
+        elif self.sprite_frame == 1:
+            self.sprite = pygame.image.load('theGuy_left.png')
+        elif self.sprite_frame == 2:
+            self.sprite = pygame.image.load('theGuy_right_rightFoot.png')
+        elif self.sprite_frame == 3:
+            self.sprite = pygame.image.load('theGuy_right_leftFoot.png')
+        elif self.sprite_frame == 4:
+            self.sprite = pygame.image.load('theGuy_left_leftFoot.png')
+        elif self.sprite_frame == 5:
+            self.sprite = pygame.image.load('theGuy_left_rightFoot.png')
 
 
