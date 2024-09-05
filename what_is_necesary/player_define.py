@@ -130,7 +130,8 @@ class Player:
 
 
 
-
+    def player_coords(self):
+        return (self.x,self.y)
     def draw(self, screen):
         self.character_sprite = pygame.Rect(self.x, self.y, self.player_width, self.player_height)
         pygame.draw.rect(screen, CHARACTER_COLOR, self.character_sprite)

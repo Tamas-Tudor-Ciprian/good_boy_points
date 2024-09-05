@@ -4,7 +4,8 @@
 import pygame
 import player_define
 import hotbar_define
-
+import time
+import item_define
 
 from defines import *
 from block_define import *
@@ -21,11 +22,19 @@ running = True
 def game():
     pygame.init()
 
+
+
+
+
+
+
     block_coord = tuple((i, j)for j in range(450, -50, -50) for i in range(0, 1000, 50) )
 
     player = player_define.Player()
-
+    pickaxe = item_define.Pickaxe(player.player_coords(),(55,35),'pickaxe.png',)
     hotbar = hotbar_define.Hotbar()
+
+
 
 
     blocks = [Block(block_coord[i]) for i in range(35)]
@@ -41,8 +50,17 @@ def game():
 
     running = True
 
+    last_time = time.time()
+
     while running:
 
+
+
+        curent_time = time.time()
+
+        time_delta = curent_time - last_time
+
+        last_time = curent_time
 
         # Did the user click the window close button?
         for event in pygame.event.get():
@@ -52,15 +70,23 @@ def game():
         #make the sky by filling the backround with blue
         screen.fill(SKY_COLOR)
 
-
+        pickaxe.set_coords(player.player_coords())
 
         keys = pygame.key.get_pressed()
 
-        hotbar.draw(screen)
+
 
         player.movement(keys,blocks)
 
+        pickaxe.draw()
+
+        pickaxe.mine()
+
         player.draw(screen)
+        hotbar.draw(screen)
+
+
+
 
 
 
