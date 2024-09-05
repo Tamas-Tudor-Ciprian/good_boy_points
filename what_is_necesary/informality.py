@@ -54,8 +54,6 @@ def game():
 
     while running:
 
-
-
         curent_time = time.time()
 
         time_delta = curent_time - last_time
@@ -70,28 +68,31 @@ def game():
         #make the sky by filling the backround with blue
         screen.fill(SKY_COLOR)
 
-        pickaxe.set_coords(player.player_coords())
-
         keys = pygame.key.get_pressed()
 
+        orientation = player.movement(keys, blocks)
+
+        pickaxe.set_coords(player.player_coords(),orientation)
 
 
-        player.movement(keys,blocks)
+
+
+
+
 
         pickaxe.draw()
 
-        pickaxe.mine()
 
         player.draw(screen)
         hotbar.draw(screen)
 
 
 
-
-
-
         for i in blocks:
             i.draw(screen)
+            for event in pygame.event.get():
+                if event.type == pygame.MOUSEBUTTONDOWN and i.block_sprite.collidepoint(event.pos):
+                    pickaxe.mine()
 
         # Flip the display
         pygame.display.flip()

@@ -127,6 +127,7 @@ class Player:
         if (keys[pygame.K_SPACE]):
             self.jump()
 
+        return self.face_right
 
 
 
