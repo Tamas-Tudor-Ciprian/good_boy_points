@@ -9,7 +9,7 @@ class Player:
 
     clearance = 10
 
-    speed = 0.2
+    speed = 250
 
     width = 80
     height = 100
@@ -30,18 +30,19 @@ class Player:
         self.can_jump = False
         self.face_right = True
         self.foot_up = False
+        self.velocity = Player.speed
 
     def move_up(self):
         if self.y>0:
-            self.y -= Player.speed
+            self.y -= self.velocity
 
     def move_down(self):
         if self.y < self.down_limit:
-            self.y += Player.speed
+            self.y += self.velocity
     def move_right(self):
         self.face_right = True
         if self.x < self.right_limit:
-            self.x += Player.speed
+            self.x += self.velocity
 
             if self.foot_up == False:
                 self.sprite_frame = 2
@@ -56,7 +57,7 @@ class Player:
     def move_left(self):
         self.face_right = False
         if self.x > 0:
-            self.x -= Player.speed
+            self.x -= self.velocity
 
             if self.foot_up == False:
                 self.sprite_frame = 4
@@ -83,7 +84,9 @@ class Player:
     def mine(self):
         pass
 
-    def movement(self,keys,blocks):
+    def movement(self,keys,blocks,time_delta):
+
+        self.velocity = Player.speed * time_delta
 
         if self.face_right == True:
             self.sprite_frame = 0

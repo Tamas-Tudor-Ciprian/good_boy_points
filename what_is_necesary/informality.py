@@ -70,7 +70,7 @@ def game():
 
         keys = pygame.key.get_pressed()
 
-        orientation = player.movement(keys, blocks)
+        orientation = player.movement(keys, blocks,time_delta)
 
         pickaxe.set_coords(player.player_coords(),orientation)
 
@@ -91,8 +91,13 @@ def game():
         for i in blocks:
             i.draw(screen)
             for event in pygame.event.get():
-                if event.type == pygame.MOUSEBUTTONDOWN and i.block_sprite.collidepoint(event.pos):
+                print(event)
+                if event.type == pygame.MOUSEBUTTONDOWN:
                     pickaxe.mine()
+                    print(event.pos)
+                    print(i)
+                    print(i.block_sprite.collidepoint(event.pos))
+
 
         # Flip the display
         pygame.display.flip()
