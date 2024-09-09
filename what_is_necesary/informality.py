@@ -60,10 +60,8 @@ def game():
 
         last_time = curent_time
 
-        # Did the user click the window close button?
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
+
+
 
         #make the sky by filling the backround with blue
         screen.fill(SKY_COLOR)
@@ -90,13 +88,18 @@ def game():
 
         for i in blocks:
             i.draw(screen)
-            for event in pygame.event.get():
-                print(event)
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    pickaxe.mine()
-                    print(event.pos)
-                    print(i)
-                    print(i.block_sprite.collidepoint(event.pos))
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            print(event)
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                pickaxe.mine()
+                for i in blocks:
+                    if i.block_sprite.collidepoint(event.pos):
+                        print(event.pos)
+                        print(i)
+
 
 
         # Flip the display
