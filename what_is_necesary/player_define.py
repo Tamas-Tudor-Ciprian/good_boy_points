@@ -1,6 +1,9 @@
 import pygame
 from defines import *
 
+
+#this is way to long optimisation and splitting needed, rework this!
+
 class Player:
 
 
@@ -8,6 +11,9 @@ class Player:
     sprite_display = pygame.display.set_mode((WIDTH,HEIGHT))
 
     clearance = 10
+
+
+
 
     speed = 250
 

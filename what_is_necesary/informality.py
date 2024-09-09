@@ -1,5 +1,8 @@
 # Simple pygame program
 
+
+#should have separate functions and clases for event handlling in their own file!
+
 # Import and initialize the pygame library
 import pygame
 import player_define
