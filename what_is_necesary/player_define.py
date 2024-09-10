@@ -20,7 +20,7 @@ class Player:
     width = 80
     height = 100
     right_limit = WIDTH - width
-    down_limit = HEIGHT = height
+    down_limit = HEIGHT - height
 
     def __init__(self):
         self.x = 500
@@ -87,8 +87,6 @@ class Player:
             self.jump_counter -= 1
 
 
-    def mine(self):
-        pass
 
     def movement(self,keys,blocks,time_delta):
 
