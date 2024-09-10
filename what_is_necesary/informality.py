@@ -99,7 +99,7 @@ def game():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 pickaxe.mine()
                 for i in blocks:
-                    if i.block_sprite.collidepoint(event.pos) and comp_dist(player,i,80):
+                    if i.block_sprite.collidepoint(event.pos) and comp_dist(player,i,100):
                         print(event.pos)
                         print(i)
                         blocks.remove(i)
