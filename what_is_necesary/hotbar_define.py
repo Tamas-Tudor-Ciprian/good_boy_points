@@ -13,7 +13,8 @@ class Hotbar:
     y = 20
 
     def __init__(self):
-        self.rect_list = [pygame.Rect(x,Hotbar.y,Hotbar.slot_width,Hotbar.slot_height) for x in range(Hotbar.x,Hotbar.x+Hotbar.slot_width*Hotbar.slot_nr,Hotbar.slot_width)]
+        self.rect_list = [pygame.Rect(x,Hotbar.y,Hotbar.slot_width,Hotbar.slot_height)
+                          for x in range(Hotbar.x,Hotbar.x+Hotbar.slot_width*Hotbar.slot_nr,Hotbar.slot_width)]
 
     def draw(self,screen):
         for i in self.rect_list:
