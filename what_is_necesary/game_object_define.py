@@ -123,3 +123,9 @@ class Collision_obj(Game_obj):
         return collision_det
 
 
+class Sprite_rect_obj(Sprite_obj,Rect_obj):
+    """this class will be used to revamp the block_define"""
+    pass
+
+class Item_sprite_obj(Sprite_obj):
+    pass

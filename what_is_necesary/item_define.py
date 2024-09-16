@@ -3,6 +3,7 @@ import pygame
 from defines import *
 
 class Item:
+    """completly forgot about this one but this will also need to be revamped"""
 
     sprite_display = pygame.display.set_mode((WIDTH,HEIGHT))
     def __init__(self,coord_tuple,offset_tuple,sprite):

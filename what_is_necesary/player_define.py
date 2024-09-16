@@ -1,6 +1,6 @@
 import pygame
 from defines import *
-
+from game_object_define import *
 
 #this is way to long optimisation and splitting needed, rework this!
 
@@ -160,3 +160,5 @@ class Player:
             self.sprite = pygame.image.load('theGuy_left_rightFoot.png')
 
 
+class new_Player:
+    pass
