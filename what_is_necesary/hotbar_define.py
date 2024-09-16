@@ -3,6 +3,7 @@ from defines import *
 
 class Hotbar:
 
+    """this class needs to be changed according to the new standards"""
 
     slot_height = 50
     slot_width = 50

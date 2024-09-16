@@ -6,6 +6,7 @@ from defines import *
 
 class Player:
 
+    """this class needs to be completly revamped"""
 
 
     sprite_display = pygame.display.set_mode((WIDTH,HEIGHT))
