@@ -1,6 +1,6 @@
 import pygame
 from defines import *
-from game_object_define import *
+
 
 #this is way to long optimisation and splitting needed, rework this!
 
@@ -160,16 +160,3 @@ class Player:
             self.sprite = pygame.image.load('theGuy_left_rightFoot.png')
 
 
-class new_Player(Game_obj):
-    def __init__(self,coord_tuple):
-        super(coord_tuple)
-        sprite = Sprite_obj()
-        collision = Collision_obj()
-        in_hand = item_obj()
-    def movement(self):
-        pass
-
-    def in_hand_action(self):
-        pass
-    def draw(self):
-        pass
