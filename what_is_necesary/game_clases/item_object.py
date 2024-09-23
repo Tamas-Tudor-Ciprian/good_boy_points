@@ -1,2 +1,2 @@
-class item_obj():
+class Item_obj():
     pass
