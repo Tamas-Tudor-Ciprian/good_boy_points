@@ -102,7 +102,7 @@ class Collision_obj(Game_obj):
         self.right_rect = pygame.Rect(self.x + self.width + 0.2, self.y, 1, self.height)
 
 
-        #here be what informs the status of the rectangles
+
 
 
 
@@ -127,5 +127,5 @@ class Sprite_rect_obj(Sprite_obj,Rect_obj):
     """this class will be used to revamp the block_define"""
     pass
 
-class Item_sprite_obj(Sprite_obj):
+class item_obj():
     pass
