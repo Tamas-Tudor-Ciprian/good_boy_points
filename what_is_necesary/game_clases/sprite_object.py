@@ -7,8 +7,8 @@ class Sprite_obj(Game_obj):
     """this class takes care of putting the sprite on the screen and animating it when needed"""
     sprite_display = pygame.display.set_mode((WIDTH,HEIGHT))
     def __init__(self,coord_tuple,sprites_directory):
-        super.__init__(coord_tuple)
-        sprites_paths = [sprites_directory + i for i in os.listdir(sprites_directory)]
+        super().__init__(coord_tuple)
+        sprites_paths = [sprites_directory  + r"\\" + i for i in os.listdir(sprites_directory)]
         self.__sprites =[pygame.image.load(i) for i in sprites_paths]
         self.frame = 0
 

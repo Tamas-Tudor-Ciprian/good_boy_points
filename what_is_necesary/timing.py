@@ -7,7 +7,7 @@ import time
 
 
 class timer:
-    def __init__(self,accumulator_size):
+    def __init__(self,accumulator_size = None):
         self.__time_anchor = time.time()
         self.__time_accumulator = 0
         self.__acumulator_size = accumulator_size
@@ -17,9 +17,12 @@ class timer:
         current_time = time.time()
         time_delta = current_time - self.__time_anchor
         self.__time_anchor = current_time
-        self.__time_accumulator += time_delta
-        if self.__time_accumulator >= self.__acumulator_size:
-            self.__time_accumulator = 0
+
+        if self.__acumulator_size != None:
+            self.__time_accumulator += time_delta
+            if self.__time_accumulator >= self.__acumulator_size:
+                self.__time_accumulator = 0
+
         return time_delta
 
 

@@ -4,12 +4,10 @@
 #should have separate functions and clases for event handlling in their own file!
 
 # Import and initialize the pygame library
-import pygame
+
 import player_define
 import hotbar_define
-import time
-import item_define
-
+import timing
 
 from defines import *
 from block_define import *
@@ -34,8 +32,8 @@ def game():
 
     block_coord = tuple((i, j)for j in range(450, -50, -50) for i in range(0, 1000, 50) )
 
-    player = player_define.Player()
-    pickaxe = item_define.Pickaxe(player.player_coords(),(55,35),'pickaxe.png',)
+
+
     hotbar = hotbar_define.Hotbar()
 
 
@@ -54,17 +52,14 @@ def game():
 
     running = True
 
-    last_time = time.time()
+    player = player_define.Player((50,50))
+    timer = timing.timer()
 
     while running:
 
-        curent_time = time.time()
-
-        time_delta = curent_time - last_time
-
-        last_time = curent_time
 
 
+        time_delta = timer.delta_timer()
 
 
         #make the sky by filling the backround with blue
@@ -72,20 +67,14 @@ def game():
 
         keys = pygame.key.get_pressed()
 
-        orientation = player.movement(keys, blocks,time_delta)
 
-        pickaxe.set_coords(player.player_coords(),orientation)
-
+        player.movement(keys,blocks,time_delta)
 
 
-
+        player.draw()
 
 
 
-        pickaxe.draw()
-
-
-        player.draw(screen)
         hotbar.draw(screen)
 
 
@@ -97,15 +86,19 @@ def game():
             if event.type == pygame.QUIT:
                 running = False
             print(event)
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                pickaxe.mine()
-                for i in blocks:
-                    if i.block_sprite.collidepoint(event.pos) and comp_dist(player,i,80):
-                        print(event.pos)
-                        print(i)
-                        blocks.remove(i)
-                        del i
-                        break
+
+
+
+
+            # if event.type == pygame.MOUSEBUTTONDOWN:
+            #     pickaxe.mine()
+            #     for i in blocks:
+            #         if i.block_sprite.collidepoint(event.pos) and comp_dist(player,i,80):
+            #             print(event.pos)
+            #             print(i)
+            #             blocks.remove(i)
+            #             del i
+            #             break
 
 
 

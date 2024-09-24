@@ -6,30 +6,31 @@ from item_object import *
 
 
 class Player(Sprite_obj):
-    speed = 1
+    speed = 200
     jump_height = 100
     sprites_location = r"C:\Users\uig60821\PycharmProjects\good_boy_points\what_is_necesary\player\player_sprites"
 
     def __init__(self,coord_tuple):
-        super(coord_tuple,Player.sprites_location)
-        self.collider = Collision_obj(coord_tuple)
+        super().__init__(coord_tuple,Player.sprites_location)
+        sprite_size = self.get_default_sprite().get_size()
+        self.collider = Collision_obj(coord_tuple,sprite_size[0],sprite_size[1])
         in_hand = Item_obj()
         self.jump_counter = Player.jump_height
 
     def move_up(self,time_delta):
-        new_position = (self.x,self.y-1*time_delta)
+        new_position = (self.x,self.y-Player.speed*time_delta)
         self.relocate(new_position)
         self.collider.relocate(new_position)
     def move_left(self,time_delta):
-        new_position = (self.x-1*time_delta,self.y)
+        new_position = (self.x-Player.speed*time_delta,self.y)
         self.relocate(new_position)
         self.collider.relocate(new_position)
     def move_right(self,time_delta):
-        new_position = (self.x + 1*time_delta,self.y)
+        new_position = (self.x + Player.speed*time_delta,self.y)
         self.relocate(new_position)
         self.collider.relocate(new_position)
     def move_down(self,time_delta):
-        new_position = (self.x,self.y + 1*time_delta)
+        new_position = (self.x,self.y + Player.speed*time_delta)
         self.relocate(new_position)
         self.collider.relocate(new_position)
 

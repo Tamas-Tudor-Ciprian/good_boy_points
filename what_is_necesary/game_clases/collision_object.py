@@ -7,7 +7,7 @@ class Collision_obj(Game_obj):
     def __init__(self,coord_tuple,width,height):
         self.x = coord_tuple[0]
         self.y = coord_tuple[1]
-        super(coord_tuple)
+        super().__init__(coord_tuple)
         self.width = width
         self.height = height
 
