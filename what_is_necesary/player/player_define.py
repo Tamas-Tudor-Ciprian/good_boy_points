@@ -3,12 +3,13 @@ from game_object import *
 from collision_object import *
 from sprite_object import *
 from item_object import *
-
+import os
 
 class Player(Sprite_obj):
+    "this may be more efficient by also inheriting the collision object instead of having ownership of one"
     speed = 200
     jump_height = 100
-    sprites_location = r"C:\Users\uig60821\PycharmProjects\good_boy_points\what_is_necesary\player\player_sprites"
+    sprites_location = os.getcwd() + "\\player_sprites"
 
     def __init__(self,coord_tuple):
         super().__init__(coord_tuple,Player.sprites_location)
