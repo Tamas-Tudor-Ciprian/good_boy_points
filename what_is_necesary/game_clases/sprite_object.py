@@ -23,7 +23,7 @@ class Sprite_obj(Game_obj):
 
 
     def animate(self,frames,timing):
-        if self.frame in frames:
+        if self.frame in frames and timing:
             i = frames.index(self.frame)
             if self.frame != frames[-1]:
                 self.frame = frames(i+1)
