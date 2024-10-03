@@ -9,7 +9,7 @@ class Player(Sprite_obj):
     "this may be more efficient by also inheriting the collision object instead of having ownership of one"
     speed = 200
     jump_height = 100
-    sprites_location = os.getcwd() + "\\player_sprites"
+    sprites_location = os.getcwd() + "\\player\\player_sprites"
 
     def __init__(self,coord_tuple):
         super().__init__(coord_tuple,Player.sprites_location)
