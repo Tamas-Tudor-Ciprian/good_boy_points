@@ -6,7 +6,7 @@ from item_object import *
 import os
 
 class Player(Sprite_obj):
-    "this may be more efficient by also inheriting the collision object instead of having ownership of one"
+    "this having ownership of a sprite_obj might make more sense"
     speed = 200
     jump_height = 100
     sprites_location = os.getcwd() + "\\player\\player_sprites"
@@ -18,20 +18,20 @@ class Player(Sprite_obj):
         in_hand = Item_obj()
         self.jump_counter = Player.jump_height
 
-    def move_up(self,time_delta):
-        new_position = (self.x,self.y-Player.speed*time_delta)
+    def move_up(self,velocity):
+        new_position = (self.x,self.y-velocity)
         self.relocate(new_position)
         self.collider.relocate(new_position)
-    def move_left(self,time_delta):
-        new_position = (self.x-Player.speed*time_delta,self.y)
+    def move_left(self,velocity):
+        new_position = (self.x-velocity,self.y)
         self.relocate(new_position)
         self.collider.relocate(new_position)
-    def move_right(self,time_delta):
-        new_position = (self.x + Player.speed*time_delta,self.y)
+    def move_right(self,velocity):
+        new_position = (self.x + velocity,self.y)
         self.relocate(new_position)
         self.collider.relocate(new_position)
-    def move_down(self,time_delta):
-        new_position = (self.x,self.y + Player.speed*time_delta)
+    def move_down(self,velocity):
+        new_position = (self.x,self.y + velocity)
         self.relocate(new_position)
         self.collider.relocate(new_position)
 
@@ -43,20 +43,26 @@ class Player(Sprite_obj):
         collisions = self.collider.check(rectangle_list)
 
         if not collisions["down"]:
-           self.move_down(time_delta)
+           self.move_down(velocity)
 
-        if keys[pygame.K_a] and collisions["left"]:
-            self.move_left(time_delta)
+        if keys[pygame.K_a] and not collisions["left"]:
+            self.move_left(velocity)
 
-        if keys[pygame.K_d] and collisions["right"]:
-            self.move_right(time_delta)
+        if keys[pygame.K_d] and not collisions["right"]:
+            self.move_right(velocity)
 
         if (keys[pygame.K_SPACE] or keys[pygame.K_w]):
-            self.move_up(time_delta)
-            self.move_up(time_delta)
-            self.jump_counter -= 1
+            if self.jump_counter >= 0 :
+                self.move_up(velocity)
+                self.move_up(velocity)
+                self.jump_counter -= 1
             if self.jump_counter == 0 and collisions["down"]:
                 self.jump_counter = Player.jump_height
+
+
+    def draw(self,screen):
+        self.collider.draw(screen)
+        super().draw()
 
     def in_hand_action(self,activated):
         pass

@@ -67,11 +67,12 @@ def game():
 
         keys = pygame.key.get_pressed()
 
+        rect_list =[i.block_sprite for i in blocks]
 
-        player.movement(keys,blocks,time_delta)
+        player.movement(keys,rect_list,time_delta)
 
 
-        player.draw()
+        player.draw(screen)
 
 
 
