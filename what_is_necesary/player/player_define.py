@@ -8,7 +8,7 @@ import os
 class Player(Sprite_obj):
     "this having ownership of a sprite_obj might make more sense"
     speed = 200
-    jump_height = 100
+    jump_height = 500
     sprites_location = os.getcwd() + "\\player\\player_sprites"
 
     def __init__(self,coord_tuple):
@@ -16,7 +16,7 @@ class Player(Sprite_obj):
         sprite_size = self.get_default_sprite().get_size()
         self.collider = Collision_obj(coord_tuple,sprite_size[0],sprite_size[1])
         in_hand = Item_obj()
-        self.jump_counter = Player.jump_height
+        self.jump_counter = 0
 
     def move_up(self,velocity):
         new_position = (self.x,self.y-velocity)
@@ -52,7 +52,7 @@ class Player(Sprite_obj):
             self.move_right(velocity)
 
         if (keys[pygame.K_SPACE] or keys[pygame.K_w]):
-            if self.jump_counter >= 0 :
+            if self.jump_counter > 0 :
                 self.move_up(velocity)
                 self.move_up(velocity)
                 self.jump_counter -= 1
