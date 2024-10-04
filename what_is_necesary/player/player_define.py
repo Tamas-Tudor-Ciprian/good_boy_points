@@ -11,29 +11,35 @@ class Player(Sprite_obj):
     jump_height = 500
     sprites_location = os.getcwd() + "\\player\\player_sprites"
 
+    colider_x_offset = 25
+    colider_y_offset = 0
+
     def __init__(self,coord_tuple):
         super().__init__(coord_tuple,Player.sprites_location)
         sprite_size = self.get_default_sprite().get_size()
-        self.collider = Collision_obj(coord_tuple,sprite_size[0],sprite_size[1])
+        self.collider = Collision_obj(coord_tuple,sprite_size[0]-50,sprite_size[1])
         in_hand = Item_obj()
         self.jump_counter = 0
+
+    def offset_colider(self,player_coord):
+        return (player_coord[0]+Player.colider_x_offset,player_coord[1]+Player.colider_y_offset)
 
     def move_up(self,velocity):
         new_position = (self.x,self.y-velocity)
         self.relocate(new_position)
-        self.collider.relocate(new_position)
+        self.collider.relocate(self.offset_colider(new_position))
     def move_left(self,velocity):
         new_position = (self.x-velocity,self.y)
         self.relocate(new_position)
-        self.collider.relocate(new_position)
+        self.collider.relocate(self.offset_colider(new_position))
     def move_right(self,velocity):
         new_position = (self.x + velocity,self.y)
         self.relocate(new_position)
-        self.collider.relocate(new_position)
+        self.collider.relocate(self.offset_colider(new_position))
     def move_down(self,velocity):
         new_position = (self.x,self.y + velocity)
         self.relocate(new_position)
-        self.collider.relocate(new_position)
+        self.collider.relocate(self.offset_colider(new_position))
 
 
 
@@ -61,7 +67,7 @@ class Player(Sprite_obj):
 
 
     def draw(self,screen):
-        self.collider.draw(screen)
+        #self.collider.draw(screen)
         super().draw()
 
     def in_hand_action(self,activated):

@@ -6,7 +6,7 @@ class Collision_obj(Game_obj):
     checks collision with each of them to determine the object that is being touched and its direction
     Note: implementing visual cues for debugging purposes might be usefull"""
 
-    rect_thick = 5
+    rect_thick = 1
 
     def __init__(self,coord_tuple,width,height):
         self.x = coord_tuple[0]
@@ -59,7 +59,7 @@ class Collision_obj(Game_obj):
 
     def draw(self,screen):
         """this function is supposed to draw all 4 rectangles and change their collor when collision is detected"""
-        pygame.draw.rect(screen,COLORS["GREEN"],self.up_rect)
+        pygame.draw.rect(screen, COLORS["GREEN"], self.up_rect)
         pygame.draw.rect(screen, COLORS["GREEN"], self.left_rect)
         pygame.draw.rect(screen, COLORS["GREEN"], self.right_rect)
         pygame.draw.rect(screen, COLORS["GREEN"], self.down_rect)
