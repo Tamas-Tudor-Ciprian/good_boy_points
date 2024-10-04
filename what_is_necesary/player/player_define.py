@@ -49,7 +49,7 @@ class Player(Sprite_obj):
         collisions = self.collider.check(rectangle_list)
 
         if not collisions["down"]:
-           self.move_down(velocity)
+           self.move_down(velocity *2)
 
         if keys[pygame.K_a] and not collisions["left"]:
             self.move_left(velocity)
@@ -59,8 +59,7 @@ class Player(Sprite_obj):
 
         if (keys[pygame.K_SPACE] or keys[pygame.K_w]):
             if self.jump_counter > 0 :
-                self.move_up(velocity)
-                self.move_up(velocity)
+                self.move_up(velocity*3)
                 self.jump_counter -= 1
             if self.jump_counter == 0 and collisions["down"]:
                 self.jump_counter = Player.jump_height
