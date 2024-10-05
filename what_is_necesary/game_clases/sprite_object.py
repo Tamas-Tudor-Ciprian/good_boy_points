@@ -10,24 +10,30 @@ class Sprite_obj(Game_obj):
         super().__init__(coord_tuple)
         sprites_paths = [sprites_directory  + r"\\" + i for i in os.listdir(sprites_directory)]
         self.__sprites =[pygame.image.load(i) for i in sprites_paths]
-        self.frame = 0
+        self.__current_sprite = self.__sprites[0]
+        self.inverted = False
 
-    def get_default_sprite(self):
-        return self.__sprites[0]
 
-    def mirror(self,offset):
-        pass
+    def get_sprite(self):
+        """getter"""
+        return self.__current_sprite
+
+
+
+    def change_frame(self,frame):
+        """in case you need to change the sprite instantly"""
+        self.__current_sprite = self.__sprites[frame]
+        self.inverted = False
+    def mirror(self,x_bool,y_bool):
+        "call the pygame flip function to flip either verticaly or horizontaly as called"
+        self.__current_sprite = pygame.transform.flip(self.__current_sprite,x_bool,y_bool)
+        self.inverted = True
 
     def draw(self):
-        Sprite_obj.sprite_display.blit(self.__sprites[self.frame], (self.x, self.y))
-
+        """we simply display the sprite with this one"""
+        Sprite_obj.sprite_display.blit(self.__current_sprite, (self.x, self.y))
 
     def animate(self,frames,timing):
-        if self.frame in frames and timing:
-            i = frames.index(self.frame)
-            if self.frame != frames[-1]:
-                self.frame = frames(i+1)
-            else:
-                self.frame = frames[0]
-        else:
-            self.frame = frames[0]
+        """this here function when called will alternate the current sprite
+        between the frames specified when the timing is true"""
+        pass

@@ -16,10 +16,11 @@ class Player(Sprite_obj):
 
     def __init__(self,coord_tuple):
         super().__init__(coord_tuple,Player.sprites_location)
-        sprite_size = self.get_default_sprite().get_size()
+        sprite_size = self.get_sprite().get_size()
         self.collider = Collision_obj(coord_tuple,sprite_size[0]-50,sprite_size[1])
         in_hand = Item_obj()
         self.jump_counter = 0
+        self.left_facing = True
 
     def offset_colider(self,player_coord):
         return (player_coord[0]+Player.colider_x_offset,player_coord[1]+Player.colider_y_offset)
@@ -29,10 +30,12 @@ class Player(Sprite_obj):
         self.relocate(new_position)
         self.collider.relocate(self.offset_colider(new_position))
     def move_left(self,velocity):
+        self.left_facing = True
         new_position = (self.x-velocity,self.y)
         self.relocate(new_position)
         self.collider.relocate(self.offset_colider(new_position))
     def move_right(self,velocity):
+        self.left_facing = False
         new_position = (self.x + velocity,self.y)
         self.relocate(new_position)
         self.collider.relocate(self.offset_colider(new_position))
@@ -47,6 +50,13 @@ class Player(Sprite_obj):
 
         velocity = self.speed * time_delta
         collisions = self.collider.check(rectangle_list)
+
+        if self.left_facing and self.inverted:
+            self.change_frame(0)
+        elif not self.left_facing and not self.inverted:
+            self.mirror(True, False)
+
+
 
         if not collisions["down"]:
            self.move_down(velocity *2)
