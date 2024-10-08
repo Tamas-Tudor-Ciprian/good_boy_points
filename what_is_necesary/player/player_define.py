@@ -21,6 +21,7 @@ class Player(Sprite_obj):
         in_hand = Item_obj()
         self.jump_counter = 0
         self.left_facing = True
+        self.moved_to_side = False
 
     def offset_colider(self,player_coord):
         return (player_coord[0]+Player.colider_x_offset,player_coord[1]+Player.colider_y_offset)
@@ -34,11 +35,13 @@ class Player(Sprite_obj):
         new_position = (self.x-velocity,self.y)
         self.relocate(new_position)
         self.collider.relocate(self.offset_colider(new_position))
+        self.moved_to_side = True
     def move_right(self,velocity):
         self.left_facing = False
         new_position = (self.x + velocity,self.y)
         self.relocate(new_position)
         self.collider.relocate(self.offset_colider(new_position))
+        self.moved_to_side = True
     def move_down(self,velocity):
         new_position = (self.x,self.y + velocity)
         self.relocate(new_position)
@@ -51,10 +54,7 @@ class Player(Sprite_obj):
         velocity = self.speed * time_delta
         collisions = self.collider.check(rectangle_list)
 
-        if self.left_facing and self.inverted:
-            self.change_frame(0)
-        elif not self.left_facing and not self.inverted:
-            self.mirror(True, False)
+
 
 
 
@@ -75,8 +75,20 @@ class Player(Sprite_obj):
                 self.jump_counter = Player.jump_height
 
 
-    def draw(self,screen):
+    def draw(self,screen,timing):
         #self.collider.draw(screen)
+
+        if self.moved_to_side:
+            self.animate([1,2],timing)
+            self.moved_to_side = False
+
+        if self.left_facing and self.inverted:
+            self.change_frame(0)
+        elif not self.left_facing and not self.inverted:
+            self.mirror(True, False)
+
+
+
         super().draw()
 
     def in_hand_action(self,activated):

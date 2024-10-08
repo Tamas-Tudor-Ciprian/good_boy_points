@@ -50,6 +50,7 @@ def game():
     blocks.append(Block(block_coord[79]))
 
 
+
     running = True
 
     player = player_define.Player((50,50))
@@ -72,7 +73,7 @@ def game():
         player.movement(keys,rect_list,time_delta)
 
 
-        player.draw(screen)
+        player.draw(screen,timer.get_timing())
 
 
 
