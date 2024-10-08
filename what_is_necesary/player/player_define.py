@@ -8,7 +8,7 @@ import os
 class Player(Sprite_obj):
     "this having ownership of a sprite_obj might make more sense"
     speed = 200
-    jump_height = 500
+    jump_height = 250
     sprites_location = os.getcwd() + "\\player\\player_sprites"
 
     colider_x_offset = 25
