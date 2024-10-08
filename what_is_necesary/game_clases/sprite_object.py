@@ -38,7 +38,11 @@ class Sprite_obj(Game_obj):
 
     def animate(self,frames,timing):
         """this here function when called will alternate the current sprite
-        between the frames specified when the timing is true"""
+        between the frames specified when the timing is true
+        it might make a lot of sense to use a generator function to make everythin more python-y
+        """
+
         if timing:
-            self.__current_sprite_index = find_element_and_continue(self.__current_sprite,frames)
+            self.__current_sprite_index = find_element_and_continue(self.__current_sprite_index,frames)
             self.__current_sprite = self.__sprites[self.__current_sprite_index]
+            self.inverted = False

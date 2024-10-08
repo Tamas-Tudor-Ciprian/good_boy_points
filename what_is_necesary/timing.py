@@ -7,13 +7,15 @@ import time
 
 
 class timer:
+    """this should have a function that takes another and only calls it when a certain delta has passed but doing so
+    everytime the interval has passed creating smooth timing for events"""
     def __init__(self,accumulator_size = None):
         self.__time_anchor = time.time()
         self.__time_accumulator = 0
         self.__acumulator_size = accumulator_size
 
 
-    def delta_timer(self):
+    def delta_timer(self,function_to_call = None):
         current_time = time.time()
         time_delta = current_time - self.__time_anchor
         self.__time_anchor = current_time
@@ -22,6 +24,8 @@ class timer:
             self.__time_accumulator += time_delta
             if self.__time_accumulator >= self.__acumulator_size:
                 self.__time_accumulator = 0
+                if function_to_call != None:
+                    function_to_call()
 
         return time_delta
 

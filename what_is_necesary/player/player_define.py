@@ -81,6 +81,9 @@ class Player(Sprite_obj):
         if self.moved_to_side:
             self.animate([1,2],timing)
             self.moved_to_side = False
+        else:
+            self.change_frame(0)
+
 
         if self.left_facing and self.inverted:
             self.change_frame(0)

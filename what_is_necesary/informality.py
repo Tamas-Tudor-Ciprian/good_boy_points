@@ -24,19 +24,11 @@ running = True
 def game():
     pygame.init()
 
-
-
-
-
-
-
     block_coord = tuple((i, j)for j in range(450, -50, -50) for i in range(0, 1000, 50) )
 
 
 
     hotbar = hotbar_define.Hotbar()
-
-
 
 
     blocks = [Block(block_coord[i]) for i in range(35)]
@@ -54,7 +46,7 @@ def game():
     running = True
 
     player = player_define.Player((50,50))
-    timer = timing.timer()
+    timer = timing.timer(0.2)
 
     while running:
 
@@ -112,9 +104,7 @@ def game():
     # Done! Time to quit.
 
 
-
     pygame.quit()
-
 
 
 game()
