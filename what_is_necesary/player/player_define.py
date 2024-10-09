@@ -8,7 +8,7 @@ import os
 class Player(Sprite_obj):
     "this having ownership of a sprite_obj might make more sense"
     speed = 200
-    jump_height = 250
+    jump_height = 310
     sprites_location = os.getcwd() + "\\player\\player_sprites"
 
     colider_x_offset = 25
@@ -18,7 +18,6 @@ class Player(Sprite_obj):
         super().__init__(coord_tuple,Player.sprites_location)
         sprite_size = self.get_sprite().get_size()
         self.collider = Collision_obj(coord_tuple,sprite_size[0]-50,sprite_size[1])
-        in_hand = Item_obj()
         self.jump_counter = 0
         self.left_facing = True
         self.moved_to_side = False
@@ -76,7 +75,7 @@ class Player(Sprite_obj):
 
 
     def draw(self,screen,timing):
-        #self.collider.draw(screen)
+
 
         if self.moved_to_side:
             self.animate([1,2],timing)
@@ -93,6 +92,8 @@ class Player(Sprite_obj):
 
 
         super().draw()
+
+        #self.collider.draw(screen)
 
     def in_hand_action(self,activated):
         pass

@@ -59,7 +59,7 @@ class Collision_obj(Game_obj):
 
     def draw(self,screen):
         """this function is supposed to draw all 4 rectangles and change their collor when collision is detected"""
-        pygame.draw.rect(screen, COLORS["GREEN"], self.up_rect)
-        pygame.draw.rect(screen, COLORS["GREEN"], self.left_rect)
-        pygame.draw.rect(screen, COLORS["GREEN"], self.right_rect)
-        pygame.draw.rect(screen, COLORS["GREEN"], self.down_rect)
+        pygame.draw.rect(screen, COLORS["BLACK"], self.up_rect)
+        pygame.draw.rect(screen, COLORS["BLACK"], self.left_rect)
+        pygame.draw.rect(screen, COLORS["BLACK"], self.right_rect)
+        pygame.draw.rect(screen, COLORS["BLACK"], self.down_rect)

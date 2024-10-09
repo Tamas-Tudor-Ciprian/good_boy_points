@@ -14,6 +14,7 @@ from block_define import *
 
 
 
+
 # Set up the drawing window
 screen = pygame.display.set_mode([WIDTH, HEIGHT])
 
@@ -28,7 +29,7 @@ def game():
 
 
 
-    hotbar = hotbar_define.Hotbar()
+
 
 
     blocks = [Block(block_coord[i]) for i in range(35)]
@@ -69,7 +70,7 @@ def game():
 
 
 
-        hotbar.draw(screen)
+
 
 
 
@@ -83,15 +84,15 @@ def game():
 
 
 
-            # if event.type == pygame.MOUSEBUTTONDOWN:
-            #     pickaxe.mine()
-            #     for i in blocks:
-            #         if i.block_sprite.collidepoint(event.pos) and comp_dist(player,i,80):
-            #             print(event.pos)
-            #             print(i)
-            #             blocks.remove(i)
-            #             del i
-            #             break
+            if event.type == pygame.MOUSEBUTTONDOWN:
+               # pickaxe.mine()
+                for i in blocks:
+                    if i.block_sprite.collidepoint(event.pos) and comp_dist(player,i,80):
+                        print(event.pos)
+                        print(i)
+                        blocks.remove(i)
+                        del i
+                        break
 
 
 
