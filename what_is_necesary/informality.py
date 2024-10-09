@@ -1,4 +1,4 @@
-# Simple pygame program
+# not so simple pygame program
 
 
 #should have separate functions and clases for event handlling in their own file!
@@ -28,7 +28,7 @@ def game():
     block_coord = tuple((i, j)for j in range(450, -50, -50) for i in range(0, 1000, 50) )
 
 
-    experimental_cell = Inventory_cell((0,0))
+
 
 
 
@@ -68,7 +68,9 @@ def game():
 
         player.draw(screen,timer.get_timing())
 
-        experimental_cell.draw()
+
+
+
 
 
 

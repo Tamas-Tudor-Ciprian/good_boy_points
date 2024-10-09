@@ -17,6 +17,7 @@ class Sprite_obj(Game_obj):
         self.inverted = False
 
 
+
     def get_sprite(self):
         """getter"""
         return self.__current_sprite
@@ -42,6 +43,10 @@ class Sprite_obj(Game_obj):
         between the frames specified when the timing is true
         it might make a lot of sense to use a generator function to make everythin more python-y
         """
+
+
+
+        pass
 
         if timing:
             self.__current_sprite_index = find_element_and_continue(self.__current_sprite_index,frames)

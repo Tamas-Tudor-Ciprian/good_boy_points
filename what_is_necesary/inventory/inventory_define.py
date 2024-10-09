@@ -4,7 +4,7 @@ from sprite_object import *
 
 class Inventory_cell(Sprite_obj):
     """yeah this one is weird and highly experimental
-    this will ultimately be the only type of object allowed to "hold" and item"""
+    it will ultimately be the only type of object allowed to "hold" and item"""
     def __init__(self,coord_tuple):
         super().__init__(coord_tuple,r"\inventory\inventory_box_sprite")
         self.__item = None
@@ -26,6 +26,12 @@ class Inventory_cell(Sprite_obj):
 
 class Inventory(Game_obj):
     """this"""
-    def __init__(self,coord_tuple):
+    def __init__(self,coord_tuple,rows,collumns):
         super().__init__(coord_tuple)
-        self.items = []
+        #generating theese is no easy task
+        self.cells = [Inventory_cell((x,y) for x in range(0,))]
+
+
+
+    def draw(self):
+        pass
