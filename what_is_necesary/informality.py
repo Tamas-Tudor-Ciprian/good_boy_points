@@ -12,7 +12,7 @@ import timing
 from defines import *
 from block_define import *
 
-
+from inventory_define import *
 
 
 # Set up the drawing window
@@ -28,7 +28,7 @@ def game():
     block_coord = tuple((i, j)for j in range(450, -50, -50) for i in range(0, 1000, 50) )
 
 
-
+    experimental_cell = Inventory_cell((0,0))
 
 
 
@@ -68,6 +68,7 @@ def game():
 
         player.draw(screen,timer.get_timing())
 
+        experimental_cell.draw()
 
 
 

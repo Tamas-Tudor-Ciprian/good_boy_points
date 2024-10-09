@@ -9,13 +9,14 @@ class Player(Sprite_obj):
     "this having ownership of a sprite_obj might make more sense"
     speed = 200
     jump_height = 310
-    sprites_location = os.getcwd() + "\\player\\player_sprites"
+
 
     colider_x_offset = 25
     colider_y_offset = 0
 
     def __init__(self,coord_tuple):
-        super().__init__(coord_tuple,Player.sprites_location)
+
+        super().__init__(coord_tuple,"\\player\\player_sprites")
         sprite_size = self.get_sprite().get_size()
         self.collider = Collision_obj(coord_tuple,sprite_size[0]-50,sprite_size[1])
         self.jump_counter = 0

@@ -6,7 +6,7 @@ class Inventory_cell(Sprite_obj):
     """yeah this one is weird and highly experimental
     this will ultimately be the only type of object allowed to "hold" and item"""
     def __init__(self,coord_tuple):
-        super().__init__(coord_tuple,r"\inventory_box_sprite")
+        super().__init__(coord_tuple,r"\inventory\inventory_box_sprite")
         self.__item = None
 
     def add_item(self,item):
@@ -20,6 +20,10 @@ class Inventory_cell(Sprite_obj):
 
     def use_item(self):
         self.__item.action() #im not very sure if this will not need any sort of parameters
+
+
+
+
 class Inventory(Game_obj):
     """this"""
     def __init__(self,coord_tuple):
