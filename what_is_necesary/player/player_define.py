@@ -3,9 +3,10 @@ from game_object import *
 from collision_object import *
 from sprite_object import *
 from item_object import *
+from game_object import *
 import os
 
-class Player(Sprite_obj):
+class Player(Game_obj):
     "this having ownership of a sprite_obj might make more sense"
     speed = 200
     jump_height = 310
@@ -15,9 +16,9 @@ class Player(Sprite_obj):
     colider_y_offset = 0
 
     def __init__(self,coord_tuple):
-
-        super().__init__(coord_tuple,"\\player\\player_sprites")
-        sprite_size = self.get_sprite().get_size()
+        super().__init__(coord_tuple)
+        self.skin = Sprite_obj(coord_tuple,"\\player\\player_sprites")
+        sprite_size = self.skin.get_sprite().get_size()
         self.collider = Collision_obj(coord_tuple,sprite_size[0]-50,sprite_size[1])
         self.jump_counter = 0
         self.left_facing = True
@@ -30,22 +31,31 @@ class Player(Sprite_obj):
         new_position = (self.x,self.y-velocity)
         self.relocate(new_position)
         self.collider.relocate(self.offset_colider(new_position))
+        self.skin.relocate(new_position)
     def move_left(self,velocity):
-        self.left_facing = True
+
         new_position = (self.x-velocity,self.y)
         self.relocate(new_position)
         self.collider.relocate(self.offset_colider(new_position))
+        self.skin.relocate(new_position)
+
         self.moved_to_side = True
+        self.left_facing = True
     def move_right(self,velocity):
-        self.left_facing = False
+
         new_position = (self.x + velocity,self.y)
         self.relocate(new_position)
         self.collider.relocate(self.offset_colider(new_position))
+        self.skin.relocate(new_position)
+
+
         self.moved_to_side = True
+        self.left_facing = False
     def move_down(self,velocity):
         new_position = (self.x,self.y + velocity)
         self.relocate(new_position)
         self.collider.relocate(self.offset_colider(new_position))
+        self.skin.relocate(new_position)
 
 
 
@@ -79,20 +89,20 @@ class Player(Sprite_obj):
 
 
         if self.moved_to_side:
-            self.animate([1,2],timing)
+            self.skin.animate([1,2],timing)
             self.moved_to_side = False
         else:
-            self.change_frame(0)
+            self.skin.change_frame(0)
 
 
-        if self.left_facing and self.inverted:
-            self.change_frame(0)
-        elif not self.left_facing and not self.inverted:
-            self.mirror(True, False)
+        if self.left_facing and self.skin.inverted:
+            self.skin.change_frame(0)
+        elif not self.left_facing and not self.skin.inverted:
+            self.skin.mirror(True, False)
 
 
 
-        super().draw()
+        self.skin.draw()
 
         #self.collider.draw(screen)
 
