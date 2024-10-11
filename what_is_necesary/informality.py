@@ -21,6 +21,7 @@ screen = pygame.display.set_mode([WIDTH, HEIGHT])
 # Run until the user asks to quit
 running = True
 
+inventory = Inventory((10,10),5)
 
 def game():
     pygame.init()
@@ -68,7 +69,7 @@ def game():
 
         player.draw(screen,timer.get_timing())
 
-
+        inventory.draw()
 
 
 

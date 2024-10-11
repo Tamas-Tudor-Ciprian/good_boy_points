@@ -2,10 +2,13 @@ from sprite_object import *
 
 class Item_obj():
     """it might make sense to create this class in parralel or at least after the inventory as they ar very interlinked"""
-    def action(self):
-        pass
 
-    def draw_in_inventory(self,coords):
+    def __init__(self,coord_tuple,sprite_location):
+        super().__init__(coord_tuple)
+        self.skin = Sprite_obj(coord_tuple,sprite_location)
+
+
+    def action(self):
         pass
 
     def draw_in_hand(self,coords,left_facing):
