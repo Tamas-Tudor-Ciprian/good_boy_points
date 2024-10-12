@@ -6,10 +6,10 @@
 # Import and initialize the pygame library
 
 import player_define
-import hotbar_define
+
 import timing
 
-from defines import *
+
 from block_define import *
 
 from inventory_define import *
@@ -66,11 +66,7 @@ def game():
 
         player.movement(keys,rect_list,time_delta)
 
-
         player.draw(screen,timer.get_timing())
-
-
-
 
 
 
