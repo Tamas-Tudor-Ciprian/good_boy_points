@@ -1,12 +1,13 @@
 from game_object import *
 from sprite_object import *
 from math_stuff import *
+from item_object import *
 
-
-class Pickaxe(Game_obj):
+class Pickaxe(Item_obj):
+    """this class will probably help me form the item class"""
     def __init__(self,coord_tuple):
-        super().__init__(coord_tuple)
-        self.skin = Sprite_obj(coord_tuple,r"\pickaxe")
+        super().__init__(coord_tuple,r"\pickaxe")
+
 
 
 

@@ -6,6 +6,7 @@
       <sourceFolder url="file://$MODULE_DIR$/what_is_necesary/game_clases" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/what_is_necesary/player" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/what_is_necesary/inventory" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/what_is_necesary/pickaxe" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/.venv" />
     </content>
     <orderEntry type="inheritedJdk" />

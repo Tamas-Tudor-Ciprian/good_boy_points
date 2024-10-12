@@ -4,12 +4,14 @@ from collision_object import *
 from sprite_object import *
 from item_object import *
 from game_object import *
+from inventory_define import *
+from pickaxe import *
 import os
 
 class Player(Game_obj):
     "this having ownership of a sprite_obj might make more sense"
     speed = 200
-    jump_height = 310
+    jump_height = 370
 
 
     colider_x_offset = 25
@@ -23,6 +25,11 @@ class Player(Game_obj):
         self.jump_counter = 0
         self.left_facing = True
         self.moved_to_side = False
+
+        self.inventory = Inventory((10,10),5)
+        self.inventory.cells[0].add_item(Pickaxe(self.inventory.cells[0].get_coords()))
+
+
 
     def offset_colider(self,player_coord):
         return (player_coord[0]+Player.colider_x_offset,player_coord[1]+Player.colider_y_offset)
@@ -66,7 +73,8 @@ class Player(Game_obj):
 
 
 
-
+        #this handles the jump and should do so in respect with actual jump height
+        #not some arbitrary number that depends on processing speed
 
         if not collisions["down"]:
            self.move_down(velocity *2)
