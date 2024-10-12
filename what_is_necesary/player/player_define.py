@@ -112,6 +112,8 @@ class Player(Game_obj):
 
         self.skin.draw()
 
+        self.inventory.draw()
+
         #self.collider.draw(screen)
 
     def in_hand_action(self,activated):

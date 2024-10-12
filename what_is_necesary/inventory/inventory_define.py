@@ -12,6 +12,7 @@ class Inventory_cell(Game_obj):
     height = 60
 
     def __init__(self,coord_tuple):
+        super().__init__(coord_tuple)
         #this should be resized according to the width and height using pygame transform
         self.item_box = Sprite_obj(coord_tuple, r"\inventory\inventory_box_sprite")
         self.__item = None
