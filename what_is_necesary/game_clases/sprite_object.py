@@ -7,7 +7,7 @@ import os
 class Sprite_obj(Game_obj):
     """this class takes care of putting the sprite on the screen and animating it when needed"""
     sprite_display = pygame.display.set_mode((WIDTH,HEIGHT))
-    def __init__(self,coord_tuple,sprites_directory):
+    def __init__(self,coord_tuple,sprites_directory,scaling_tuple = None):
         super().__init__(coord_tuple)
         sprites_directory = os.getcwd() + sprites_directory
         sprites_paths = [sprites_directory  + r"\\" + i for i in os.listdir(sprites_directory)]
@@ -16,12 +16,16 @@ class Sprite_obj(Game_obj):
         self.__current_sprite = self.__sprites[self.__current_sprite_index]
         self.inverted = False
 
+        #scaling be done here
+        if scaling_tuple != None:
+            self.__current_sprite = pygame.transform.scale(self.__current_sprite,scaling_tuple)
 
 
+
+    #I might add the option to scale the sprite for this function
     def get_sprite(self):
         """getter"""
         return self.__current_sprite
-
 
 
     def change_frame(self,frame):
@@ -43,11 +47,7 @@ class Sprite_obj(Game_obj):
         between the frames specified when the timing is true
         it might make a lot of sense to use a generator function to make everythin more python-y
         """
-
-
-
-        pass
-
+        #this solution is remarkably simple
         if timing:
             self.__current_sprite_index = find_element_and_continue(self.__current_sprite_index,frames)
             self.__current_sprite = self.__sprites[self.__current_sprite_index]
