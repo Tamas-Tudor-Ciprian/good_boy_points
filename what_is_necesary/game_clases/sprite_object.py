@@ -7,7 +7,7 @@ import os
 class Sprite_obj(Game_obj):
     """this class takes care of putting the sprite on the screen and animating it when needed"""
     sprite_display = pygame.display.set_mode((WIDTH,HEIGHT))
-    def __init__(self,coord_tuple,sprites_directory,scaling_tuple = None):
+    def __init__(self,coord_tuple,sprites_directory):
         super().__init__(coord_tuple)
         sprites_directory = os.getcwd() + sprites_directory
         sprites_paths = [sprites_directory  + r"\\" + i for i in os.listdir(sprites_directory)]
@@ -16,9 +16,9 @@ class Sprite_obj(Game_obj):
         self.__current_sprite = self.__sprites[self.__current_sprite_index]
         self.inverted = False
 
-        #scaling be done here
-        if scaling_tuple != None:
-            self.__current_sprite = pygame.transform.scale(self.__current_sprite,scaling_tuple)
+
+
+
 
 
 
@@ -34,9 +34,14 @@ class Sprite_obj(Game_obj):
         self.__current_sprite = self.__sprites[self.__current_sprite_index]
         self.inverted = False
     def mirror(self,x_bool,y_bool):
-        "call the pygame flip function to flip either verticaly or horizontaly as called"
+        """call the pygame flip function to flip either verticaly or horizontaly as called
+        though this being called each frame might not be the most eficient"""
         self.__current_sprite = pygame.transform.flip(self.__current_sprite,x_bool,y_bool)
         self.inverted = True
+
+    def scale(self,scaling_tuple):
+        """this scales the sprite,though it might not be the most eficient to do this every frame"""
+        self.__current_sprite = pygame.transform.scale(self.__current_sprite,scaling_tuple)
 
     def draw(self):
         """we simply display the sprite with this one"""
