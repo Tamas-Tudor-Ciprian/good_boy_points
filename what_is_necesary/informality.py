@@ -66,6 +66,8 @@ def game():
 
         player.movement(keys,rect_list,time_delta)
 
+
+
         player.draw(screen,timer.get_timing())
 
 
@@ -81,18 +83,18 @@ def game():
             if event.type == pygame.QUIT:
                 running = False
 
+            player.hotbar_actions(keys,event,blocks,player)
 
 
-
-            if event.type == pygame.MOUSEBUTTONDOWN:
-               # pickaxe.mine()
-                for i in blocks:
-                    if i.block_sprite.collidepoint(event.pos) and comp_dist(player,i,80):
-                        print(event.pos)
-                        print(i)
-                        blocks.remove(i)
-                        del i
-                        break
+            # if event.type == pygame.MOUSEBUTTONDOWN:
+            #    # pickaxe.mine()
+            #     for i in blocks:
+            #         if i.block_sprite.collidepoint(event.pos) and comp_dist(player,i,80):
+            #             print(event.pos)
+            #             print(i)
+            #             blocks.remove(i)
+            #             del i
+            #             break
 
 
 

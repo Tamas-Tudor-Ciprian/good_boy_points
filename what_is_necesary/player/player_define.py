@@ -26,7 +26,7 @@ class Player(Game_obj):
         self.left_facing = True
         self.moved_to_side = False
 
-        self.inventory = Inventory((10,10),5)
+        self.inventory = Inventory((10,10))
         self.inventory.cells[0].add_item(Pickaxe(self.inventory.cells[0].get_coords()))
 
 
@@ -71,8 +71,6 @@ class Player(Game_obj):
         velocity = self.speed * time_delta
         collisions = self.collider.check(rectangle_list)
 
-
-
         #this handles the jump and should do so in respect with actual jump height
         #not some arbitrary number that depends on processing speed
 
@@ -91,6 +89,11 @@ class Player(Game_obj):
                 self.jump_counter -= 1
             if self.jump_counter == 0 and collisions["down"]:
                 self.jump_counter = Player.jump_height
+
+
+    def hotbar_actions(self,keys,event,blocks,player):
+        self.inventory.select_cell(keys)
+        self.inventory.use_selected_cell(event,blocks,player)
 
 
     def draw(self,screen,timing):

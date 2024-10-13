@@ -10,7 +10,6 @@ class Pickaxe(Item_obj):
 
     def action(self,event,blocks,player):
         if event.type == pygame.MOUSEBUTTONDOWN:
-            # pickaxe.mine()
             for i in blocks:
                 if i.block_sprite.collidepoint(event.pos) and comp_dist(player, i, 80):
                     print(event.pos)

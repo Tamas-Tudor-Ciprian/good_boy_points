@@ -1,3 +1,5 @@
+import pygame
+
 from game_object import *
 from sprite_object import *
 
@@ -16,6 +18,16 @@ class Inventory_cell(Game_obj):
         #this should be resized according to the width and height using pygame transform
         self.item_box = Sprite_obj(coord_tuple, r"\inventory\inventory_box_sprite")
         self.__item = None
+        self.__selected = False
+
+
+    def select(self):
+        self.__selected = True
+        self.item_box.change_frame(1)
+
+    def unselect(self):
+        self.__selected = False
+        self.item_box.change_frame(0)
 
 
     def draw(self):
@@ -32,8 +44,9 @@ class Inventory_cell(Game_obj):
         self.__item = None
         return temp
 
-    def use_item(self):
-        self.__item.action() #im not very sure if this will not need any sort of parameters
+    def use_item(self,event,blocks,player):
+        if self.__selected and self.__item != None:
+            self.__item.action(event,blocks,player) #im not very sure if this will not need any sort of parameters
 
     def relocate(self,coord_tuple):
         """I don't know if this overloading is really neccessary as
@@ -41,15 +54,42 @@ class Inventory_cell(Game_obj):
         super().relocate(coord_tuple)
         self.item_box.relocate(coord_tuple)
 
+    def select_status(self):
+        return self.__selected
+
+
 
 
 class Inventory(Game_obj):
     """this"""
-    def __init__(self,coord_tuple,collumns):
+
+    key_select_dict = {
+        pygame.K_1 : 0,
+        pygame.K_2 : 1,
+        pygame.K_3 : 2,
+        pygame.K_4 : 3,
+        pygame.K_5 : 4,
+
+    }
+
+    collumns = 5
+
+    def __init__(self,coord_tuple):
         super().__init__(coord_tuple)
         #generating these is no easy task
-        self.cells = [Inventory_cell((x,self.y)) for x in range(self.x,self.x+Inventory_cell.width*collumns,Inventory_cell.width)]
+        self.cells = [Inventory_cell((x,self.y)) for x in range(self.x,self.x+Inventory_cell.width*Inventory.collumns,Inventory_cell.width)]
+        self.__current_cell = 0
+        self.cells[self.__current_cell].select()
 
+    def select_cell(self,keys):
+        for key in Inventory.key_select_dict:
+            if keys[key]:
+                self.cells[self.__current_cell].unselect()
+                self.__current_cell = Inventory.key_select_dict[key]
+                self.cells[self.__current_cell].select()
+
+    def use_selected_cell(self,event,blocks,player):
+        self.cells[self.__current_cell].use_item(event,blocks,player)
 
 
     def draw(self):
