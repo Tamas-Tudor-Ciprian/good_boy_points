@@ -6,7 +6,8 @@ from item_object import *
 class Pickaxe(Item_obj):
     """this class will probably help me form the item class"""
     def __init__(self,coord_tuple):
-        super().__init__(coord_tuple,r"\pickaxe\pickaxe_sprite",)
+        super().__init__(coord_tuple,r"\pickaxe\pickaxe_sprite",(70,70))
+
 
     def action(self,event,blocks,player):
         if event.type == pygame.MOUSEBUTTONDOWN:
@@ -17,3 +18,4 @@ class Pickaxe(Item_obj):
                     blocks.remove(i)
                     del i
                     break
+

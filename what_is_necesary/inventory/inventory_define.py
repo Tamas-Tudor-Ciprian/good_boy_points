@@ -35,6 +35,10 @@ class Inventory_cell(Game_obj):
         if self.__item != None:
             self.__item.draw()
 
+    def draw_item_in_hand(self,coords,left_facing,timing):
+        if self.__item != None:
+            self.__item.draw_in_hand(coords,left_facing,timing)
+
     def add_item(self,item):
         self.__item = item
     """there should be some sort of function that say gives the "hand" of the player the sprite of the item 
@@ -57,6 +61,8 @@ class Inventory_cell(Game_obj):
     def select_status(self):
         return self.__selected
 
+    def item_status(self):
+        return self.__item != None
 
 
 
@@ -92,6 +98,9 @@ class Inventory(Game_obj):
         self.cells[self.__current_cell].use_item(event,blocks,player)
 
 
-    def draw(self):
+    def draw(self,coords,left_facing,timing):
         for i in self.cells:
             i.draw()
+            if i.item_status() and i.select_status():
+                i.draw_item_in_hand(coords,left_facing,timing)
+

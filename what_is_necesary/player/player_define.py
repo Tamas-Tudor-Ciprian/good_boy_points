@@ -21,6 +21,10 @@ class Player(Game_obj):
         super().__init__(coord_tuple)
         self.skin = Sprite_obj(coord_tuple,"\\player\\player_sprites")
         sprite_size = self.skin.get_sprite().get_size()
+
+        self.width = sprite_size[0]
+        self.height = sprite_size[1]
+
         self.collider = Collision_obj(coord_tuple,sprite_size[0]-50,sprite_size[1])
         self.jump_counter = 0
         self.left_facing = True
@@ -115,7 +119,12 @@ class Player(Game_obj):
 
         self.skin.draw()
 
-        self.inventory.draw()
+        hand_location = (self.x,self.y)
+
+        if self.left_facing:
+            hand_location = (self.x - self.width,self.y )
+
+        self.inventory.draw(hand_location,self.left_facing,timing)
 
         #self.collider.draw(screen)
 
