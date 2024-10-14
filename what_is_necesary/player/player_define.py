@@ -119,10 +119,15 @@ class Player(Game_obj):
 
         self.skin.draw()
 
-        hand_location = (self.x,self.y)
+        hand_height_offset = 20
+        hand_width_offset = 10
+
+        hand_location = (self.x+self.width - hand_width_offset,self.y + self.height/2+hand_height_offset)
 
         if self.left_facing:
-            hand_location = (self.x - self.width,self.y )
+            hand_location = (self.x + hand_width_offset,self.y +self.height /2+hand_height_offset)
+
+
 
         self.inventory.draw(hand_location,self.left_facing,timing)
 
