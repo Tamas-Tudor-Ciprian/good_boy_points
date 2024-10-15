@@ -13,6 +13,7 @@ class timer:
         self.__time_anchor = time.time()
         self.__time_accumulator = 0
         self.__acumulator_size = accumulator_size
+        self.reset = False
 
 
     def delta_timer(self,function_to_call = None):
@@ -24,6 +25,7 @@ class timer:
             self.__time_accumulator += time_delta
             if self.__time_accumulator >= self.__acumulator_size:
                 self.__time_accumulator = 0
+                self.reset = True
                 if function_to_call != None:
                     function_to_call()
 
@@ -32,7 +34,9 @@ class timer:
 
 
     def get_timing(self):
-        return self.__time_accumulator == 0
+        to_return = self.reset
+        self.reset = False
+        return to_return
 
 
     def set_new_accumulator_size(self,accumulator_size):

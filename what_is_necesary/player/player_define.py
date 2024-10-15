@@ -11,7 +11,7 @@ import os
 class Player(Game_obj):
     "this having ownership of a sprite_obj might make more sense"
     speed = 200
-    jump_height = 200
+    jump_height = 300
 
 
     colider_x_offset = 25
