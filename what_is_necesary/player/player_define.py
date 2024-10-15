@@ -11,7 +11,7 @@ import os
 class Player(Game_obj):
     "this having ownership of a sprite_obj might make more sense"
     speed = 200
-    jump_height = 370
+    jump_height = 200
 
 
     colider_x_offset = 25
@@ -88,6 +88,8 @@ class Player(Game_obj):
             self.move_right(velocity)
 
         if (keys[pygame.K_SPACE] or keys[pygame.K_w]):
+            if collisions["up"]:
+                self.jump_counter = 0
             if self.jump_counter > 0 :
                 self.move_up(velocity*3)
                 self.jump_counter -= 1

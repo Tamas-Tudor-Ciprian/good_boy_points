@@ -19,7 +19,8 @@ class Sprite_obj(Game_obj):
 
 
 
-
+    def rotate(self,angle):
+        self.__current_sprite = pygame.transform.rotate(self.__current_sprite,angle)
 
 
     #I might add the option to scale the sprite for this function

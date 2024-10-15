@@ -64,16 +64,10 @@ def game():
 
         rect_list =[i.block_sprite for i in blocks]
 
-        player.movement(keys,rect_list,time_delta)
 
+        player.movement(keys, rect_list, time_delta)
 
-
-        player.draw(screen,timer.get_timing())
-
-
-
-
-
+        player.draw(screen, timer.get_timing())
 
 
         for i in blocks:
@@ -95,7 +89,6 @@ def game():
             #             blocks.remove(i)
             #             del i
             #             break
-
 
 
         # Flip the display
