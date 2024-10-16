@@ -26,7 +26,7 @@ running = True
 def game():
     pygame.init()
 
-    block_coord = tuple((i, j)for j in range(450, -50, -50) for i in range(0, 1000, 50) )
+    block_coord = tuple((i, j)for j in range(HEIGHT - BLOCK_SIDE, -BLOCK_SIDE, -BLOCK_SIDE) for i in range(0, WIDTH, BLOCK_SIDE) )
 
 
 
@@ -62,7 +62,7 @@ def game():
 
         keys = pygame.key.get_pressed()
 
-        rect_list =[i.block_sprite for i in blocks]
+        rect_list =[i.detector for i in blocks]
 
 
         player.movement(keys, rect_list, time_delta)
@@ -71,13 +71,13 @@ def game():
 
 
         for i in blocks:
-            i.draw(screen)
+            i.draw()
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
 
-            player.hotbar_actions(keys,event,blocks,player)
+            player.hotbar_actions(keys,event,blocks,player,timing)
 
 
             # if event.type == pygame.MOUSEBUTTONDOWN:

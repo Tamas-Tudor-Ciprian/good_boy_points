@@ -10,9 +10,8 @@ import os
 
 class Player(Game_obj):
     "this having ownership of a sprite_obj might make more sense"
-    #please introduce relative jumping with velocity!
     speed = 200
-    jump_height = 300
+    jump_height = 250
 
 
     colider_x_offset = 25
@@ -98,9 +97,9 @@ class Player(Game_obj):
                 self.jump_counter = Player.jump_height
 
 
-    def hotbar_actions(self,keys,event,blocks,player):
+    def hotbar_actions(self,keys,event,blocks,player,timing):
         self.inventory.select_cell(keys)
-        self.inventory.use_selected_cell(event,blocks,player)
+        self.inventory.use_selected_cell(event,blocks,player,timing)
 
 
     def draw(self,screen,timing):

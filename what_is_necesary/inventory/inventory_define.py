@@ -48,9 +48,9 @@ class Inventory_cell(Game_obj):
         self.__item = None
         return temp
 
-    def use_item(self,event,blocks,player):
+    def use_item(self,event,blocks,player,timing):
         if self.__selected and self.__item != None:
-            self.__item.action(event,blocks,player) #im not very sure if this will not need any sort of parameters
+            self.__item.action(event,blocks,player,timing) #im not very sure if this will not need any sort of parameters
 
     def relocate(self,coord_tuple):
         """I don't know if this overloading is really neccessary as
@@ -94,8 +94,8 @@ class Inventory(Game_obj):
                 self.__current_cell = Inventory.key_select_dict[key]
                 self.cells[self.__current_cell].select()
 
-    def use_selected_cell(self,event,blocks,player):
-        self.cells[self.__current_cell].use_item(event,blocks,player)
+    def use_selected_cell(self,event,blocks,player,timing):
+        self.cells[self.__current_cell].use_item(event,blocks,player,timing)
 
 
     def draw(self,coords,left_facing,timing):

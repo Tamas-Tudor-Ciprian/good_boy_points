@@ -17,6 +17,10 @@ class Sprite_obj(Game_obj):
         self.inverted = False
 
 
+    def get_sprite_nr(self):
+        return len(self.__sprites)
+
+
 
 
     def rotate(self,angle):

@@ -14,16 +14,16 @@ class Pickaxe(Item_obj):
         self.angular_velocity = 10
 
 
-    def action(self,event,blocks,player):
+    def action(self,event,blocks,player,timing):
 
         if event.type == pygame.MOUSEBUTTONDOWN:
             self.mining = True
         elif event.type == pygame.MOUSEBUTTONUP:
             self.mining = False
             for i in blocks:
-                if i.block_sprite.collidepoint(event.pos) and comp_dist(player, i, 80):
-                    blocks.remove(i)
-                    del i
+                if i.detector.collidepoint(event.pos) and comp_dist(player, i, 80) and self.mining:
+                    i.break_block(timing)
+
                     break
 
     def draw_in_hand(self,hand_coords,left_facing,timing):
