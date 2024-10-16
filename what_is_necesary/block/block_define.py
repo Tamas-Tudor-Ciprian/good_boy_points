@@ -14,21 +14,18 @@ class Block(Entity_obj):
         self.mine_state[self.current_mine_state]()
 
 
-    def break_block(self,timing):
+    def break_block(self):
         to_return = False
-        if timing:
-            if self.current_mine_state == len(self.mine_state) - 1:
-                to_return = True
-            else:
-                self.current_mine_state += 1
-                self.mine_state[self.current_mine_state]()
+        if self.current_mine_state == len(self.mine_state) - 1:
+            to_return = True
+        else:
+            self.current_mine_state += 1
+            self.mine_state[self.current_mine_state]()
 
         return to_return
 
     def reset(self):
         self.mine_state[0]()
-
-
 
     def draw(self):
         super().draw()

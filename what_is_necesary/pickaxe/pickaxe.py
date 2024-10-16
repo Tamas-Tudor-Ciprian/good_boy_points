@@ -12,16 +12,23 @@ class Pickaxe(Item_obj):
         self.mining = False
         self.angle = 0
         self.angular_velocity = 10
+        self.block_being_mined = None
+        self.mining_position = (0,0)
+
 
 
     def action(self,events,blocks,player,timing):
 
-        mining_position = (0,0)
+
+
+
+        self.block_being_mined = None
 
         for event in events:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 self.mining = True
-                mining_position = event.pos
+                self.mining_position = event.pos
+
 
 
             elif event.type == pygame.MOUSEBUTTONUP:
@@ -31,16 +38,15 @@ class Pickaxe(Item_obj):
 
 
         if self.mining:
-            print("mining")
             for i in blocks:
-                if i.detector.collidepoint(mining_position) and comp_dist(player, i, 120):
-                    print("ran a loop")
-                    if i.break_block(timing):
-                        blocks.remove(i)
-                        break
+                if i.detector.collidepoint(self.mining_position) and comp_dist(player, i, 120):
+                    if timing:
+                        if i.break_block():
+                            blocks.remove(i)
+                            break
                     break
-        else:
-            print("not mining")
+
+
 
 
 

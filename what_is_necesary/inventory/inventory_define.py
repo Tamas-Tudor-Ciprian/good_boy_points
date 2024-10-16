@@ -105,4 +105,3 @@ class Inventory(Game_obj):
             i.draw()
             if i.item_status() and i.select_status():
                 i.draw_item_in_hand(coords,left_facing,timing)
-

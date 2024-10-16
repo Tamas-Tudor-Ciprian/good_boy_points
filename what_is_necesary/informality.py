@@ -54,6 +54,8 @@ def game():
 
 
         time_delta = timer.delta_timer()
+        time_sync = timer.get_timing()
+
 
 
         #make the sky by filling the backround with blue
@@ -66,7 +68,7 @@ def game():
 
         player.movement(keys, rect_list, time_delta)
 
-        player.draw(timer.get_timing())
+        player.draw(time_sync)
 
 
         for i in blocks:
@@ -76,7 +78,7 @@ def game():
 
 
 
-        player.hotbar_actions(keys, events, blocks, player, timing)
+        player.hotbar_actions(keys, events, blocks, player, time_sync)
 
         for event in events:
             if event.type == pygame.QUIT:
