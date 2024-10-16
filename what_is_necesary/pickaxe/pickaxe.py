@@ -42,6 +42,7 @@ class Pickaxe(Item_obj):
                 if i.detector.collidepoint(self.mining_position) and comp_dist(player, i, 120):
                     if timing:
                         if i.break_block():
+                            player.inventory.add_item(i)
                             blocks.remove(i)
                             break
                     break

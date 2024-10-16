@@ -41,8 +41,8 @@ class Inventory_cell(Game_obj):
 
     def add_item(self,item):
         self.__item = item
-    """there should be some sort of function that say gives the "hand" of the player the sprite of the item 
-    to display it <- I wonder if I should make the hand be its own object"""
+        self.__item.relocate((self.x,self.y))
+
     def take_item(self):
         temp = self.__item
         self.__item = None
@@ -98,6 +98,12 @@ class Inventory(Game_obj):
     def use_selected_cell(self,event,blocks,player,timing):
 
         self.cells[self.__current_cell].use_item(event,blocks,player,timing)
+
+    def add_item(self,item):
+        for cell in self.cells:
+            if  not cell.item_status():
+                cell.add_item(item)
+                break
 
 
     def draw(self,coords,left_facing,timing):

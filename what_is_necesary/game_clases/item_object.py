@@ -19,8 +19,7 @@ class Item_obj(Game_obj):
             self.height = sprite_size[1]
         else:
             self.width = self.skin.get_sprite().get_width()
-            self.height = self.skin.get_sprite().get_height
-
+            self.height = self.skin.get_sprite().get_height()
 
 
 
