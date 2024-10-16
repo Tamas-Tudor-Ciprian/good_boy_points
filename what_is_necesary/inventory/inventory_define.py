@@ -49,6 +49,7 @@ class Inventory_cell(Game_obj):
         return temp
 
     def use_item(self,event,blocks,player,timing):
+
         if self.__selected and self.__item != None:
             self.__item.action(event,blocks,player,timing) #im not very sure if this will not need any sort of parameters
 
@@ -95,6 +96,7 @@ class Inventory(Game_obj):
                 self.cells[self.__current_cell].select()
 
     def use_selected_cell(self,event,blocks,player,timing):
+
         self.cells[self.__current_cell].use_item(event,blocks,player,timing)
 
 

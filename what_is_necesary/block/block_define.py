@@ -17,7 +17,7 @@ class Block(Entity_obj):
     def break_block(self,timing):
         to_return = False
         if timing:
-            if self.mine_state[self.current_mine_state] == self.mine_state[-1]:
+            if self.current_mine_state == len(self.mine_state) - 1:
                 to_return = True
             else:
                 self.current_mine_state += 1
@@ -34,3 +34,4 @@ class Block(Entity_obj):
         super().draw()
         self.sprite.scale((BLOCK_SIDE,BLOCK_SIDE))
         self.sprite.draw()
+        pygame.draw.rect(SCREEN,BLACK,self.detector,1)

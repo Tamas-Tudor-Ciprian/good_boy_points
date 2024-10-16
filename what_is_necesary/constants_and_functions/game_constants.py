@@ -1,3 +1,5 @@
+import pygame
+
 WIDTH = 1000
 
 HEIGHT = 500
@@ -10,6 +12,9 @@ GREY = (174,174,174)
 BROWN= (196,98,16)
 SKY_COLOR = (0, 255, 230)
 CHARACTER_COLOR = (255, 179, 0)
+
+
+SCREEN = pygame.display.set_mode([WIDTH, HEIGHT])
 
 
 COLORS = {

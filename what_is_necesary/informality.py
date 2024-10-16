@@ -15,8 +15,7 @@ from block_define import *
 from inventory_define import *
 
 
-# Set up the drawing window
-screen = pygame.display.set_mode([WIDTH, HEIGHT])
+
 
 # Run until the user asks to quit
 running = True
@@ -58,7 +57,7 @@ def game():
 
 
         #make the sky by filling the backround with blue
-        screen.fill(SKY_COLOR)
+        SCREEN.fill(SKY_COLOR)
 
         keys = pygame.key.get_pressed()
 
@@ -67,17 +66,23 @@ def game():
 
         player.movement(keys, rect_list, time_delta)
 
-        player.draw(screen, timer.get_timing())
+        player.draw(timer.get_timing())
 
 
         for i in blocks:
             i.draw()
 
-        for event in pygame.event.get():
+        events = pygame.event.get()
+
+
+
+        player.hotbar_actions(keys, events, blocks, player, timing)
+
+        for event in events:
             if event.type == pygame.QUIT:
                 running = False
 
-            player.hotbar_actions(keys,event,blocks,player,timing)
+
 
 
             # if event.type == pygame.MOUSEBUTTONDOWN:

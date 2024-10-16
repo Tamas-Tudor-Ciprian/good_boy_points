@@ -14,17 +14,36 @@ class Pickaxe(Item_obj):
         self.angular_velocity = 10
 
 
-    def action(self,event,blocks,player,timing):
+    def action(self,events,blocks,player,timing):
 
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            self.mining = True
-        elif event.type == pygame.MOUSEBUTTONUP:
-            self.mining = False
+        mining_position = (0,0)
+
+        for event in events:
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                self.mining = True
+                mining_position = event.pos
+
+
+            elif event.type == pygame.MOUSEBUTTONUP:
+                self.mining = False
+
+
+
+
+        if self.mining:
+            print("mining")
             for i in blocks:
-                if i.detector.collidepoint(event.pos) and comp_dist(player, i, 80) and self.mining:
-                    i.break_block(timing)
-
+                if i.detector.collidepoint(mining_position) and comp_dist(player, i, 120):
+                    print("ran a loop")
+                    if i.break_block(timing):
+                        blocks.remove(i)
+                        break
                     break
+        else:
+            print("not mining")
+
+
+
 
     def draw_in_hand(self,hand_coords,left_facing,timing):
         if self.mining and timing:

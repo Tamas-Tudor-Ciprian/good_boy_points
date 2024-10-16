@@ -98,11 +98,12 @@ class Player(Game_obj):
 
 
     def hotbar_actions(self,keys,event,blocks,player,timing):
+
         self.inventory.select_cell(keys)
         self.inventory.use_selected_cell(event,blocks,player,timing)
 
 
-    def draw(self,screen,timing):
+    def draw(self,timing):
 
 
         if self.moved_to_side:
@@ -133,7 +134,7 @@ class Player(Game_obj):
 
         self.inventory.draw(hand_location,self.left_facing,timing)
 
-        #self.collider.draw(screen)
+        #self.collider.draw()
 
     def in_hand_action(self,activated):
         pass
