@@ -25,22 +25,22 @@ running = True
 def game():
     pygame.init()
 
-    block_coord = tuple((i, j)for j in range(HEIGHT - BLOCK_SIDE, -BLOCK_SIDE, -BLOCK_SIDE) for i in range(0, WIDTH, BLOCK_SIDE) )
 
 
 
 
 
 
-    blocks = [Block(block_coord[i]) for i in range(35)]
 
-    blocks.append(Block(block_coord[50]))
-    blocks.append(Block(block_coord[49]))
-    blocks.append(Block(block_coord[48]))
-    blocks.append(Block(block_coord[70]))
-    blocks.append(Block(block_coord[39]))
-    blocks.append(Block(block_coord[59]))
-    blocks.append(Block(block_coord[79]))
+    blocks = [Block(BLOCK_COORD[i]) for i in range(35)]
+
+    blocks.append(Block(BLOCK_COORD[50]))
+    blocks.append(Block(BLOCK_COORD[49]))
+    blocks.append(Block(BLOCK_COORD[48]))
+    blocks.append(Block(BLOCK_COORD[70]))
+    blocks.append(Block(BLOCK_COORD[39]))
+    blocks.append(Block(BLOCK_COORD[59]))
+    blocks.append(Block(BLOCK_COORD[79]))
 
 
 

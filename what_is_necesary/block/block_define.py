@@ -42,5 +42,25 @@ class Block(Item_obj):
         self.sprite.draw()
         pygame.draw.rect(SCREEN,BLACK,self.detector,1)
 
-    def action(self,event,blocks,player,timing):
-        pass
+    def action(self,events,blocks,player,timing):
+
+        try_to_place = False
+        click_pos = (0,0)
+
+
+        for event in events:
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                try_to_place = True
+                click_pos = event.pos
+
+
+        if try_to_place:
+
+            for i in blocks:
+                if not i.detector.collidepoint(click_pos):
+                    blocks.append(player.inventory.take_item())
+                    for j in DETECTOR_RECTANGLES:
+                        if j.collidepoint(click_pos):
+                            self.relocate((j.x,j.y))
+                            break
+                    break

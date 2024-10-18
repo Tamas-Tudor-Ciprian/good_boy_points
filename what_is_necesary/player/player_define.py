@@ -101,10 +101,10 @@ class Player(Game_obj):
 
 
 
-    def hotbar_actions(self,keys,event,blocks,player,timing):
+    def hotbar_actions(self,keys,events,blocks,player,timing):
 
         self.inventory.select_cell(keys)
-        self.inventory.use_selected_cell(event,blocks,player,timing)
+        self.inventory.use_selected_cell(events,blocks,player,timing)
 
 
     def draw(self,timing):

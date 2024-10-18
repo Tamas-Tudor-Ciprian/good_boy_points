@@ -105,6 +105,8 @@ class Inventory(Game_obj):
                 cell.add_item(item)
                 break
 
+    def take_item(self):
+        return self.cells[self.__current_cell].take_item()
 
     def draw(self,coords,left_facing,timing):
         for i in self.cells:
