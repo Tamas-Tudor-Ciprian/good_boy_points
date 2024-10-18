@@ -11,7 +11,7 @@ import os
 class Player(Game_obj):
     "this having ownership of a sprite_obj might make more sense"
     speed = 200
-    jump_height = 250
+    jump_height = 60
 
 
     colider_x_offset = 25
@@ -26,13 +26,15 @@ class Player(Game_obj):
         self.height = sprite_size[1]
 
         self.collider = Collision_obj(coord_tuple,sprite_size[0]-50,sprite_size[1])
-        self.jump_counter = 0
+
         self.left_facing = True
         self.moved_to_side = False
 
         self.inventory = Inventory((10,10))
         self.inventory.cells[0].add_item(Pickaxe(self.inventory.cells[0].get_coords()))
 
+        self.last_height = 0
+        self.can_jump = False
 
 
     def offset_colider(self,player_coord):
@@ -88,13 +90,15 @@ class Player(Game_obj):
             self.move_right(velocity)
 
         if (keys[pygame.K_SPACE] or keys[pygame.K_w]):
-            if collisions["up"]:
-                self.jump_counter = 0
-            if self.jump_counter > 0 :
-                self.move_up(velocity*3)
-                self.jump_counter -= 1
-            if self.jump_counter == 0 and collisions["down"]:
-                self.jump_counter = Player.jump_height
+            if collisions["down"]:
+                self.last_height = self.y
+                self.can_jump = True
+        if self.y > self.last_height - Player.jump_height and not collisions["up"] and self.can_jump:
+            self.move_up(velocity * 3)
+        else:
+            self.can_jump = False
+
+
 
 
     def hotbar_actions(self,keys,event,blocks,player,timing):
