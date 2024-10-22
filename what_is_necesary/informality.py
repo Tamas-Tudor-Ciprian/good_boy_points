@@ -68,7 +68,7 @@ def game():
 
         player.movement(keys, rect_list, time_delta)
 
-        player.draw(time_sync)
+        player.draw()
 
 
         for i in blocks:
@@ -76,7 +76,7 @@ def game():
 
         events = pygame.event.get()
 
-
+        player.update(keys,events,blocks,time_delta,time_sync)
 
         player.hotbar_actions(keys, events, blocks, player, time_sync)
 

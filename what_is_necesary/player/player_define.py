@@ -37,10 +37,27 @@ class Player(Game_obj):
         self.last_height = 0
         self.can_jump = False
 
+        #this are variables to be updated every loop
+        self.keys = None
+        self.events = None
+        self.blocks = None
+        self.time_delta = None
+        self.time_sync = None
+
+
+    def update(self,keys,events,blocks,time_delta,time_sync):
+        self.keys = keys
+        self.events = events
+        self.blocks = blocks
+
+        #maybe I should just send the whole timer object whole idk
+        self.time_delta = time_delta
+        self.time_sync = time_sync
 
     def offset_colider(self,player_coord):
         return (player_coord[0]+Player.colider_x_offset,player_coord[1]+Player.colider_y_offset)
 
+# there should probably only be one "move" function that takes velocity and direction
     def move_up(self,velocity):
         new_position = (self.x,self.y-velocity)
         self.relocate(new_position)
@@ -102,17 +119,17 @@ class Player(Game_obj):
 
 
 
-    def hotbar_actions(self,keys,events,blocks,player,timing):
+    def hotbar_actions(self):
 
-        self.inventory.select_cell(keys)
-        self.inventory.use_selected_cell(events,blocks,player,timing)
+        self.inventory.select_cell(self.keys)
+        self.inventory.use_selected_cell(self.events,self.blocks,self,self.time_sync)
 
 
-    def draw(self,timing):
+    def draw(self):
 
 
         if self.moved_to_side:
-            self.skin.animate([1,2],timing)
+            self.skin.animate([1,2],self.time_sync)
             self.moved_to_side = False
         else:
             self.skin.change_frame(0)
