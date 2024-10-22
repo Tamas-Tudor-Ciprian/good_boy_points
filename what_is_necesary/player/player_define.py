@@ -14,6 +14,7 @@ class Player(Game_obj):
     jump_height = 60
 
 
+
     colider_x_offset = 25
     colider_y_offset = 0
 
@@ -25,7 +26,7 @@ class Player(Game_obj):
         self.width = sprite_size[0]
         self.height = sprite_size[1]
 
-        self.collider = Collision_obj(coord_tuple,sprite_size[0]-50,sprite_size[1])
+        self.collider = Collision_obj(coord_tuple,sprite_size[0]-50,sprite_size[1] - 1)
 
         self.left_facing = True
         self.moved_to_side = False
