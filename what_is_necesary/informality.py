@@ -26,12 +26,6 @@ def game():
     pygame.init()
 
 
-
-
-
-
-
-
     blocks = [Block(BLOCK_COORD[i]) for i in range(35)]
 
     blocks.append(Block(BLOCK_COORD[50]))
@@ -52,10 +46,8 @@ def game():
     while running:
 
 
-
         time_delta = timer.delta_timer()
         time_sync = timer.get_timing()
-
 
 
         #make the sky by filling the backround with blue
