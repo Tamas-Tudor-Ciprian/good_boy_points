@@ -5,7 +5,6 @@
 
 # Import and initialize the pygame library
 
-import player_define
 
 import timing
 
@@ -15,6 +14,8 @@ from block_define import *
 from inventory_define import *
 
 
+from player_define import *
+from gremlin_define import *
 
 
 # Run until the user asks to quit
@@ -26,7 +27,7 @@ def game():
     pygame.init()
 
 
-    blocks = [Block(BLOCK_COORD[i]) for i in range(35)]
+    blocks = [Block(BLOCK_COORD[i]) for i in range(31)]
 
     blocks.append(Block(BLOCK_COORD[50]))
     blocks.append(Block(BLOCK_COORD[49]))
@@ -40,7 +41,9 @@ def game():
 
     running = True
 
-    player = player_define.Player((50,50))
+    player = Player((50,50))
+    gremlin = Gremlin((600,50))
+
     timer = timing.timer(0.2)
 
     while running:
@@ -62,11 +65,14 @@ def game():
         events = pygame.event.get()
 
         player.update(keys, events, blocks, time_delta, time_sync)
+        gremlin.update(keys, events, blocks, time_delta, time_sync)
 
 
         player.movement()
+        gremlin.movement()
 
         player.draw()
+        gremlin.draw()
 
         player.hotbar_actions()
 

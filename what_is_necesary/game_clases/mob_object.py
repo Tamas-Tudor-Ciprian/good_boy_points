@@ -11,19 +11,21 @@ class Mob_obj(Game_obj):
 
 
 
-    def __init__(self,coord_tuple,sprites_directory): #the sprites directory is relative to current file
+    def __init__(self,coord_tuple,sprites_directory,scaling_tuple): #the sprites directory is relative to current file
 
         self.health = 3
         self.alive = True
 
         super().__init__(coord_tuple)
         self.skin = Sprite_obj(coord_tuple,sprites_directory)
-        sprite_size = self.skin.get_sprite().get_size()
 
-        self.width = sprite_size[0]
-        self.height = sprite_size[1]
 
-        self.collider = Collision_obj(coord_tuple, sprite_size[0] - 50, sprite_size[1] - 1)
+        self.scaling_tuple = scaling_tuple
+
+        self.width = scaling_tuple[0]
+        self.height = scaling_tuple[1]
+
+        self.collider = Collision_obj(coord_tuple, scaling_tuple[0] - 50, scaling_tuple[1] - 1)
 
         self.left_facing = True
         self.moved_to_side = False
@@ -69,14 +71,34 @@ class Mob_obj(Game_obj):
         self.relocate(new_position)
         self.collider.relocate(self.offset_colider(new_position))
         self.skin.relocate(new_position)
+        if direction == self.LEFT:
+            self.moved_to_side = True
+            self.left_facing = True
+        elif direction == self.RIGHT:
+            self.moved_to_side = True
+            self.left_facing = False
 
 
 
     def movement(self):
-        pass
+
+        velocity = Mob_obj.speed * self.time_delta
+
+        rect_list = [i.detector for i in self.blocks]
+
+        collisions = self.collider.check(rect_list)
+
+        #gravity affects all mobs
+        if not collisions["down"]:
+           self.move(velocity *2,self.DOWN)
+
+
+        return velocity,collisions
 
 
     def draw(self):
+
+
 
         if self.moved_to_side:
             self.skin.animate([1,2],self.time_sync)
@@ -89,4 +111,7 @@ class Mob_obj(Game_obj):
         elif not self.left_facing and not self.skin.inverted:
             self.skin.mirror(True, False)
 
+        self.skin.scale(self.scaling_tuple)
         self.skin.draw()
+
+        #self.collider.draw()
