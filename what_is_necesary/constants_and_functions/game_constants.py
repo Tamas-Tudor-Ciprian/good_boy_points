@@ -6,7 +6,7 @@ HEIGHT = 500
 
 BLOCK_SIDE = 50
 
-BLOCK_COORD = tuple((i, j)for j in range(HEIGHT - BLOCK_SIDE, -BLOCK_SIDE, -BLOCK_SIDE) for i in range(0, WIDTH, BLOCK_SIDE) )
+BLOCK_COORD = tuple((i, j)for j in range(HEIGHT - BLOCK_SIDE, -BLOCK_SIDE, -BLOCK_SIDE) for i in range(0, WIDTH , BLOCK_SIDE) )
 
 DETECTOR_RECTANGLES = tuple(pygame.Rect(i[0],i[1],BLOCK_SIDE,BLOCK_SIDE) for i in BLOCK_COORD)
 

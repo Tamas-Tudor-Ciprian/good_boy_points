@@ -65,8 +65,7 @@ def game():
 
 
 
-        for i in blocks:
-            i.draw()
+
 
         events = pygame.event.get()
 
@@ -78,6 +77,9 @@ def game():
         player.draw()
 
         player.hotbar_actions()
+
+        for i in blocks:
+            i.draw()
 
         for event in events:
             if event.type == pygame.QUIT:

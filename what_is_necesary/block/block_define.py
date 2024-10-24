@@ -1,6 +1,7 @@
 from item_object import *
 from game_constants import *
 from sprite_object import *
+from math_stuff import *
 
 
 class Block(Item_obj):
@@ -28,6 +29,7 @@ class Block(Item_obj):
         self.mine_state[0]()
 
     def relocate(self,coord_tuple):
+        super().relocate(coord_tuple)
         self.detector.x = coord_tuple[0]
         self.detector.y = coord_tuple[1]
 
@@ -43,6 +45,7 @@ class Block(Item_obj):
         pygame.draw.rect(SCREEN,BLACK,self.detector,1)
 
     def action(self,events,blocks,player,timing):
+        "for some reason if the blocks list is empty you can not place blocks please fix later"
 
         try_to_place = False
         click_pos = (0,0)
@@ -54,7 +57,7 @@ class Block(Item_obj):
                 click_pos = event.pos
 
 
-        if try_to_place:
+        if try_to_place and comp_dist_tup(player, click_pos, 200):
 
             for i in blocks:
                 if not i.detector.collidepoint(click_pos):
