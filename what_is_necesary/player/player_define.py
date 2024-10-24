@@ -90,10 +90,12 @@ class Player(Game_obj):
 
 
 
-    def movement(self,keys,rectangle_list,time_delta):
+    def movement(self):
 
-        velocity = self.speed * time_delta
-        collisions = self.collider.check(rectangle_list)
+        velocity = self.speed * self.time_delta
+        rect_list = [i.detector for i in self.blocks]
+
+        collisions = self.collider.check(rect_list)
 
         #this handles the jump and should do so in respect with actual jump height
         #not some arbitrary number that depends on processing speed
@@ -101,13 +103,13 @@ class Player(Game_obj):
         if not collisions["down"]:
            self.move_down(velocity *2)
 
-        if keys[pygame.K_a] and not collisions["left"]:
+        if self.keys[pygame.K_a] and not collisions["left"]:
             self.move_left(velocity)
 
-        if keys[pygame.K_d] and not collisions["right"]:
+        if self.keys[pygame.K_d] and not collisions["right"]:
             self.move_right(velocity)
 
-        if (keys[pygame.K_SPACE] or keys[pygame.K_w]):
+        if (self.keys[pygame.K_SPACE] or self.keys[pygame.K_w]):
             if collisions["down"]:
                 self.last_height = self.y
                 self.can_jump = True
@@ -154,7 +156,7 @@ class Player(Game_obj):
 
 
 
-        self.inventory.draw(hand_location,self.left_facing,timing)
+        self.inventory.draw(hand_location,self.left_facing,self.time_sync)
 
         #self.collider.draw()
 

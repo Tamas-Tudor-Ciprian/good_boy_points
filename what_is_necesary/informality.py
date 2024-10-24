@@ -63,12 +63,6 @@ def game():
 
         keys = pygame.key.get_pressed()
 
-        rect_list =[i.detector for i in blocks]
-
-
-        player.movement(keys, rect_list, time_delta)
-
-        player.draw()
 
 
         for i in blocks:
@@ -76,9 +70,14 @@ def game():
 
         events = pygame.event.get()
 
-        player.update(keys,events,blocks,time_delta,time_sync)
+        player.update(keys, events, blocks, time_delta, time_sync)
 
-        player.hotbar_actions(keys, events, blocks, player, time_sync)
+
+        player.movement()
+
+        player.draw()
+
+        player.hotbar_actions()
 
         for event in events:
             if event.type == pygame.QUIT:
