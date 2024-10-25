@@ -6,7 +6,7 @@ of animation and events
 import time
 
 
-class timer:
+class Timer:
     """this should have a function that takes another and only calls it when a certain delta has passed but doing so
     everytime the interval has passed creating smooth timing for events"""
 

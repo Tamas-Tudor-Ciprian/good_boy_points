@@ -10,8 +10,6 @@ import timing
 
 from block_define import *
 
-from inventory_define import *
-
 from player_define import *
 from gremlin_define import *
 
@@ -37,7 +35,7 @@ def game():
     player = Player((50, 50))
     gremlin = Gremlin((600, 350))
 
-    timer = timing.timer(0.2)
+    timer = timing.Timer(0.2)
 
     while running:
 

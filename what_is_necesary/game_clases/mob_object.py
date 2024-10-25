@@ -1,6 +1,7 @@
 from game_object import *
 from sprite_object import *
 from collision_object import *
+from timing import *
 
 
 class Mob_obj(Game_obj):
@@ -14,16 +15,21 @@ class Mob_obj(Game_obj):
     def __init__(self, coord_tuple, sprites_directory,
                  scaling_tuple):  # the sprites directory is relative to current file
 
+        #variables pertaining to health and taking damage
         self.health = 3
         self.alive = True
         self.took_damage = False
-        self.flicker = Mob_obj.flicker_nr
 
+        #why is it so hard to oscilate the state of something at a constant interval
+        self.flicker_counter = Mob_obj.flicker_nr
+        self.oscillator = True
+
+
+
+        #sprite stuff
         super().__init__(coord_tuple)
         self.skin = Sprite_obj(coord_tuple, sprites_directory)
-
         self.scaling_tuple = scaling_tuple
-
         self.width = scaling_tuple[0]
         self.height = scaling_tuple[1]
 
@@ -124,5 +130,25 @@ class Mob_obj(Game_obj):
 
         if not self.took_damage:
             self.skin.draw()
+        else:
+            if self.time_sync:
+                if self.oscillator:
+                    print("draw")
+                    self.oscillator = False
+                else:
+                    print("not draw")
+                    self.oscillator = True
+                    self.flicker_counter -= 1
+                    print(self.flicker_counter)
 
-        self.collider.draw()
+            if self.oscillator:
+                self.skin.draw()
+
+            if self.flicker_counter <= 0:
+                self.took_damage = False
+                self.flicker_counter = Mob_obj.flicker_nr
+
+
+
+
+        #self.collider.draw()

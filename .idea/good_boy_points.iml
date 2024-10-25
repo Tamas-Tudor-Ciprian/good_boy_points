@@ -10,6 +10,7 @@
       <sourceFolder url="file://$MODULE_DIR$/what_is_necesary/block" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/gremlin" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/what_is_necesary/gremlin" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/what_is_necesary/time_stuff" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/.venv" />
     </content>
     <orderEntry type="inheritedJdk" />
