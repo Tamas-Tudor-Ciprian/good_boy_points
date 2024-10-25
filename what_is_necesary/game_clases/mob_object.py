@@ -6,6 +6,8 @@ from collision_object import *
 class Mob_obj(Game_obj):
     speed = 200
 
+    flicker_nr = 5
+
     colider_x_offset = 25
     colider_y_offset = 0
 
@@ -14,7 +16,8 @@ class Mob_obj(Game_obj):
 
         self.health = 3
         self.alive = True
-        self.took_damage = True
+        self.took_damage = False
+        self.flicker = Mob_obj.flicker_nr
 
         super().__init__(coord_tuple)
         self.skin = Sprite_obj(coord_tuple, sprites_directory)
@@ -25,6 +28,7 @@ class Mob_obj(Game_obj):
         self.height = scaling_tuple[1]
 
         self.collider = Collision_obj(coord_tuple, scaling_tuple[0] - 50, scaling_tuple[1] - 1)
+        self.detector = pygame.Rect(self.x,self.y,scaling_tuple[0],scaling_tuple[1])
 
         self.left_facing = True
         self.moved_to_side = False
@@ -35,6 +39,7 @@ class Mob_obj(Game_obj):
         self.blocks = None
         self.time_delta = None
         self.time_sync = None
+        self.mobs = None
 
         # directional movement functions:
         self.UP = lambda velocity: (self.x, self.y - velocity)
@@ -49,10 +54,11 @@ class Mob_obj(Game_obj):
             self.alive = False
         self.took_damage = True
 
-    def update(self, keys, events, blocks, time_delta, time_sync):
+    def update(self, keys, events, blocks, mobs, time_delta, time_sync):
         self.keys = keys
         self.events = events
         self.blocks = blocks
+        self.mobs = mobs
 
         # maybe I should just send the whole timer object whole idk
         self.time_delta = time_delta
@@ -64,8 +70,7 @@ class Mob_obj(Game_obj):
     def move(self, velocity, direction):
         new_position = direction(velocity)
         self.relocate(new_position)
-        self.collider.relocate(self.offset_colider(new_position))
-        self.skin.relocate(new_position)
+
         if direction == self.LEFT:
             self.moved_to_side = True
             self.left_facing = True
@@ -73,19 +78,34 @@ class Mob_obj(Game_obj):
             self.moved_to_side = True
             self.left_facing = False
 
+    def relocate(self, coord_tuple):
+        super().relocate(coord_tuple)
+        self.collider.relocate(self.offset_colider(coord_tuple))
+        self.skin.relocate(coord_tuple)
+        self.detector.x = coord_tuple[0]
+        self.detector.y = coord_tuple[1]
+
     def movement(self):
 
         velocity = Mob_obj.speed * self.time_delta
 
-        rect_list = [i.detector for i in self.blocks]
+        block_rect_list = [i.detector for i in self.blocks]
+        mob_rect_list = [i.detector for i in self.mobs]
 
-        collisions = self.collider.check(rect_list)
+        block_collisions = self.collider.check(block_rect_list)
+        mob_collisions = self.collider.check(mob_rect_list)
 
         # gravity affects all mobs
-        if not collisions["down"]:
+        if not block_collisions["down"]:
             self.move(velocity * 2, self.DOWN)
 
-        return velocity, collisions
+        if mob_collisions["left"] or mob_collisions["right"]:
+            self.take_damage()
+
+
+
+
+        return velocity, block_collisions
 
     def draw(self):
 
@@ -101,6 +121,8 @@ class Mob_obj(Game_obj):
             self.skin.mirror(True, False)
 
         self.skin.scale(self.scaling_tuple)
-        self.skin.draw()
+
+        if not self.took_damage:
+            self.skin.draw()
 
         self.collider.draw()

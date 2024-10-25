@@ -51,8 +51,8 @@ def game():
 
         events = pygame.event.get()
 
-        player.update(keys, events, blocks, time_delta, time_sync)
-        gremlin.update(keys, events, blocks, time_delta, time_sync)
+        player.update(keys, events, blocks,[gremlin], time_delta, time_sync)
+        gremlin.update(keys, events, blocks,[player], time_delta, time_sync)
 
         player.movement()
         gremlin.movement()
