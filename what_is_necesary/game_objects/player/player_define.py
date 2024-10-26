@@ -1,5 +1,6 @@
 from mob_object import *
 from pickaxe import *
+from health_bar_define import *
 
 
 class Player(Mob_obj):
@@ -12,10 +13,10 @@ class Player(Mob_obj):
 
 
 
-        super().__init__(coord_tuple,"\\player\\player_sprites",(80,100))
+        super().__init__(coord_tuple,"\\player\\player_sprites",(80,100),3)
 
 
-
+        self.health_bar = Health_bar((880,0),self.health)
 
         self.inventory = Inventory((10,10))
         self.inventory.cells[0].add_item(Pickaxe(self.inventory.cells[0].get_coords()))
@@ -24,9 +25,11 @@ class Player(Mob_obj):
         self.can_jump = False
 
 
+
+
     def movement(self):
 
-        velocity,collisions = super().movement()
+        velocity,block_collisions,mob_collisions = super().movement()
 
 
 
@@ -38,20 +41,30 @@ class Player(Mob_obj):
 
 
 
-        if self.keys[pygame.K_a] and not collisions["left"]:
+        if self.keys[pygame.K_a] and not block_collisions["left"]:
             self.move(velocity,self.LEFT)
 
-        if self.keys[pygame.K_d] and not collisions["right"]:
+        if self.keys[pygame.K_d] and not block_collisions["right"]:
             self.move(velocity,self.RIGHT)
 
         if (self.keys[pygame.K_SPACE] or self.keys[pygame.K_w]):
-            if collisions["down"]:
+            if block_collisions["down"]:
                 self.last_height = self.y
                 self.can_jump = True
-        if self.y > self.last_height - Player.jump_height and not collisions["up"] and self.can_jump:
+        if self.y > self.last_height - Player.jump_height and not block_collisions["up"] and self.can_jump:
             self.move(velocity * 3,self.UP)
         else:
             self.can_jump = False
+
+        if mob_collisions["left"] or mob_collisions["right"]:
+            self.take_damage()
+  
+
+
+    def take_damage(self):
+        if not self.took_damage:
+            self.health_bar.reduce_health()
+        super().take_damage()
 
 
 
@@ -78,6 +91,7 @@ class Player(Mob_obj):
 
 
         self.inventory.draw(hand_location,self.left_facing,self.time_sync)
+        self.health_bar.draw()
 
 
 

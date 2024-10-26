@@ -17,6 +17,8 @@ from gremlin_define import *
 running = True
 
 
+
+
 def game():
     pygame.init()
 
@@ -32,10 +34,19 @@ def game():
 
     running = True
 
+    timer = timing.Timer(0.2)
+
+
     player = Player((50, 50))
     gremlin = Gremlin((600, 350))
 
-    timer = timing.Timer(0.2)
+    player_mob_list = []
+    gremlin_mob_list = []
+
+
+
+    gremlin_mob_list.append(player)
+    player_mob_list.append(gremlin)
 
     while running:
 
@@ -49,16 +60,28 @@ def game():
 
         events = pygame.event.get()
 
-        player.update(keys, events, blocks,[gremlin], time_delta, time_sync)
-        gremlin.update(keys, events, blocks,[player], time_delta, time_sync)
 
-        player.movement()
-        gremlin.movement()
 
-        player.draw()
-        gremlin.draw()
+        if player.alive:
+            player.update(keys, events, blocks,player_mob_list, time_delta, time_sync)
+            player.movement()
+            player.draw()
+            player.hotbar_actions()
+        else:
+            gremlin_mob_list.clear()
 
-        player.hotbar_actions()
+        if gremlin.alive:
+            gremlin.update(keys, events, blocks, gremlin_mob_list, time_delta, time_sync)
+            gremlin.movement()
+            gremlin.draw()
+        else:
+            player_mob_list.clear()
+
+
+
+
+
+
 
         for i in blocks:
             i.draw()

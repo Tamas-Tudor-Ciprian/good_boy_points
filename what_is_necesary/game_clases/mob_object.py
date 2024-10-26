@@ -11,10 +11,10 @@ class Mob_obj(Game_obj):
     colider_y_offset = 0
 
     def __init__(self, coord_tuple, sprites_directory,
-                 scaling_tuple):  # the sprites directory is relative to current file
+                 scaling_tuple, health):  # the sprites directory is relative to current file
 
         #variables pertaining to health and taking damage
-        self.health = 3
+        self.health = health
         self.alive = True
         self.took_damage = False
 
@@ -52,11 +52,13 @@ class Mob_obj(Game_obj):
         self.DOWN = lambda velocity: (self.x, self.y + velocity)
 
     def take_damage(self):
-        if self.health > 0:
+        if self.took_damage ==False:
             self.health -= 1
-        else:
-            self.alive = False
-        self.took_damage = True
+            if self.health <= 0:
+                self.alive = False
+
+
+            self.took_damage = True
 
     def update(self, keys, events, blocks, mobs, time_delta, time_sync):
         self.keys = keys
@@ -97,19 +99,17 @@ class Mob_obj(Game_obj):
         mob_rect_list = [i.detector for i in self.mobs]
 
         block_collisions = self.collider.check(block_rect_list)
-        mob_collisions = self.collider.check(mob_rect_list)
+        mob_collisions = self.collider.check(mob_rect_list,False)
 
         # gravity affects all mobs
         if not block_collisions["down"]:
             self.move(velocity * 2, self.DOWN)
 
-        if mob_collisions["left"] or mob_collisions["right"]:
-            self.take_damage()
 
 
 
 
-        return velocity, block_collisions
+        return velocity, block_collisions,mob_collisions
 
     def draw(self):
 
@@ -131,13 +131,11 @@ class Mob_obj(Game_obj):
         else:
             if self.time_sync:
                 if self.oscillator:
-                    print("draw")
                     self.oscillator = False
                 else:
-                    print("not draw")
                     self.oscillator = True
                     self.flicker_counter -= 1
-                    print(self.flicker_counter)
+
 
             if self.oscillator:
                 self.skin.draw()

@@ -12,8 +12,8 @@ class Sprite_obj(Game_obj):
         sprites_directory = os.getcwd() +r"\\game_objects\\"+ sprites_directory
         sprites_paths = [sprites_directory  + r"\\" + i for i in os.listdir(sprites_directory)]
         self.__sprites =[pygame.image.load(i) for i in sprites_paths]
-        self.__current_sprite_index = 0
-        self.__current_sprite = self.__sprites[self.__current_sprite_index]
+        self.current_sprite_index = 0
+        self.__current_sprite = self.__sprites[self.current_sprite_index]
         self.inverted = False
 
 
@@ -35,8 +35,8 @@ class Sprite_obj(Game_obj):
 
     def change_frame(self,frame):
         """in case you need to change the sprite instantly"""
-        self.__current_sprite_index = frame
-        self.__current_sprite = self.__sprites[self.__current_sprite_index]
+        self.current_sprite_index = frame
+        self.__current_sprite = self.__sprites[self.current_sprite_index]
         self.inverted = False
     def mirror(self,x_bool,y_bool):
         """call the pygame flip function to flip either verticaly or horizontaly as called
@@ -59,6 +59,6 @@ class Sprite_obj(Game_obj):
         """
         #this solution is remarkably simple
         if timing:
-            self.__current_sprite_index = find_element_and_continue(self.__current_sprite_index,frames)
-            self.__current_sprite = self.__sprites[self.__current_sprite_index]
+            self.current_sprite_index = find_element_and_continue(self.current_sprite_index, frames)
+            self.__current_sprite = self.__sprites[self.current_sprite_index]
             self.inverted = False

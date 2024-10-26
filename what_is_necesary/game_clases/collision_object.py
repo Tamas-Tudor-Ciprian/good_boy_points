@@ -10,6 +10,8 @@ class Collision_obj(Game_obj):
     rect_thick = 1
 
     def __init__(self, coord_tuple, width, height):
+
+
         self.x = coord_tuple[0]
         self.y = coord_tuple[1]
         super().__init__(coord_tuple)
@@ -38,17 +40,17 @@ class Collision_obj(Game_obj):
         self.down_rect.x = coord_tuple[0]
         self.down_rect.y = coord_tuple[1] + self.height
 
-    def check(self, to_collide_with):
+    def check(self, to_collide_with,check_for_border = True):
 
         collision_det = {"up": False, "down": False, "left": False, "right": False}
 
-        if any(self.up_rect.colliderect(i) for i in to_collide_with) or self.up_rect.y <= 0:
+        if any(self.up_rect.colliderect(i) for i in to_collide_with) or self.up_rect.y <= 0 and check_for_border:
             collision_det["up"] = True
-        if any(self.down_rect.colliderect(i) for i in to_collide_with) or self.down_rect.y >= HEIGHT:
+        if any(self.down_rect.colliderect(i) for i in to_collide_with) or self.down_rect.y >= HEIGHT and check_for_border:
             collision_det["down"] = True
-        if any(self.left_rect.colliderect(i) for i in to_collide_with) or self.left_rect.x <= 0:
+        if any(self.left_rect.colliderect(i) for i in to_collide_with) or self.left_rect.x <= 0 and check_for_border:
             collision_det["left"] = True
-        if any(self.right_rect.colliderect(i) for i in to_collide_with) or self.right_rect.x >= WIDTH:
+        if any(self.right_rect.colliderect(i) for i in to_collide_with) or self.right_rect.x >= WIDTH and check_for_border:
             collision_det["right"] = True
 
         return collision_det
