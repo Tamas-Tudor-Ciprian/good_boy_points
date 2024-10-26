@@ -9,7 +9,7 @@ class Sprite_obj(Game_obj):
     sprite_display = pygame.display.set_mode((WIDTH,HEIGHT))
     def __init__(self,coord_tuple,sprites_directory):
         super().__init__(coord_tuple)
-        sprites_directory = os.getcwd() + sprites_directory
+        sprites_directory = os.getcwd() +r"\\game_objects\\"+ sprites_directory
         sprites_paths = [sprites_directory  + r"\\" + i for i in os.listdir(sprites_directory)]
         self.__sprites =[pygame.image.load(i) for i in sprites_paths]
         self.__current_sprite_index = 0

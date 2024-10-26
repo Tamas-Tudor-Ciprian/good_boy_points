@@ -1,5 +1,4 @@
 from item_object import *
-from game_constants import *
 from sprite_object import *
 from math_stuff import *
 

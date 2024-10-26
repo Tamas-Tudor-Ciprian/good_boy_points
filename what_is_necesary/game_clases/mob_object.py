@@ -1,7 +1,5 @@
-from game_object import *
 from sprite_object import *
 from collision_object import *
-from timing import *
 
 
 class Mob_obj(Game_obj):

@@ -2,15 +2,15 @@
 <module type="PYTHON_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/what_is_necesary/constants_and_functions" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/what_is_necesary/game_clases" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/what_is_necesary/player" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/what_is_necesary/inventory" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/what_is_necesary/pickaxe" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/what_is_necesary/block" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/gremlin" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/what_is_necesary/gremlin" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/what_is_necesary/time_stuff" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/what_is_necesary/game_objects/block" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/what_is_necesary/game_objects/gremlin" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/what_is_necesary/game_objects/inventory" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/what_is_necesary/game_objects/pickaxe" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/what_is_necesary/game_objects/player" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/what_is_necesary/utility/constants_and_functions" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/what_is_necesary/utility/time_stuff" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/.venv" />
     </content>
     <orderEntry type="inheritedJdk" />

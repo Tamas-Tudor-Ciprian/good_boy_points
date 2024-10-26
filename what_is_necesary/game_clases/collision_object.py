@@ -1,5 +1,4 @@
 from game_object import *
-import pygame
 from game_constants import *
 
 

@@ -1,12 +1,6 @@
-
-from game_object import *
-
 from mob_object import *
-from item_object import *
-from game_object import *
-from inventory_define import *
 from pickaxe import *
-import os
+
 
 class Player(Mob_obj):
     "this having ownership of a sprite_obj might make more sense"

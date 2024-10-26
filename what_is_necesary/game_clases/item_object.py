@@ -1,5 +1,3 @@
-from sprite_object import *
-from game_object import *
 from inventory_define import *
 
 class Item_obj(Game_obj):
