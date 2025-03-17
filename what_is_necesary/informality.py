@@ -20,7 +20,12 @@ running = True
 
 
 def game():
+
     pygame.init()
+
+
+
+
 
     blocks = [Block(BLOCK_COORD[i]) for i in range(31)]
 

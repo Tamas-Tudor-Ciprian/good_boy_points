@@ -12,9 +12,11 @@
       <sourceFolder url="file://$MODULE_DIR$/what_is_necesary/utility/constants_and_functions" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/what_is_necesary/utility/time_stuff" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/what_is_necesary/game_objects/health_bar" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/what_is_necesary/game_objects/flag" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/what_is_necesary/game_objects/terrain" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/.venv" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="Python 3.9" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>
