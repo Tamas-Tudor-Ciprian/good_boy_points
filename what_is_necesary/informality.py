@@ -13,6 +13,8 @@ from block_define import *
 from player_define import *
 from gremlin_define import *
 
+from flag_define import *
+
 # Run until the user asks to quit
 running = True
 
@@ -24,7 +26,7 @@ def game():
     pygame.init()
 
 
-
+    font = pygame.font.Font(None,36)
 
 
     blocks = [Block(BLOCK_COORD[i]) for i in range(31)]
@@ -45,6 +47,8 @@ def game():
     player = Player((50, 50))
     gremlin = Gremlin((600, 350))
 
+    flag = Flag(BLOCK_COORD[119])
+
     player_mob_list = []
     gremlin_mob_list = []
 
@@ -54,6 +58,11 @@ def game():
     player_mob_list.append(gremlin)
 
     while running:
+
+        text_surface = font.render("SCORE:", True, (255, 255, 255))
+
+
+
 
         time_delta = timer.delta_timer()
         time_sync = timer.get_timing()
@@ -83,7 +92,7 @@ def game():
             player_mob_list.clear()
 
 
-
+        flag.draw()
 
 
 
@@ -94,6 +103,8 @@ def game():
         for event in events:
             if event.type == pygame.QUIT:
                 running = False
+
+        SCREEN.blit(text_surface, (400, 0))
 
             # if event.type == pygame.MOUSEBUTTONDOWN:
             #    # pickaxe.mine()
@@ -107,6 +118,8 @@ def game():
 
         # Flip the display
         pygame.display.flip()
+
+
 
     # Done! Time to quit.
 
